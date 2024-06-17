@@ -1,0 +1,28 @@
+<div class="flex flex-col  max-h-screen -m-6">
+    <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+        <div *ngIf="gasto == false" class="text-lg font-medium">Crear Cargo</div>
+        <div *ngIf="gasto == true"class="text-lg font-medium">Crear Gasto</div>
+        <button (click)="close()" mat-icon-button [tabIndex]="-1">
+            <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+        </button>
+    </div>
+
+      
+
+        <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" fxLayout="column" fxLayout.gt-xs="row"
+            fxFlex.gt-xs [formGroup]="sucursal">
+            <div fxLayout="column" fxFlex.gt-xs>
+                <mat-form-field appearance="outline" fxFlex.gt-xs class="bold-form" floatLabel="always">
+                  <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="..." formControlName="nombre" required />
+                </mat-form-field>
+            </div>
+            <div fxLayoutAlign="end" class="cont-btns-modal">
+                <!-- <button (click)="close()" mat-stroked-button class="btn-gris-modal">Salir</button> -->
+                <button *ngIf="gasto == true" mat-flat-button color="primary" class="btn-guardar ml-3"
+                    (click)="saveGasto()">Crear Gasto</button>
+            <button *ngIf="gasto == false" [hidden]="showOnlyName" mat-flat-button color="primary" class="btn-guardar ml-3"
+                (click)="save()">Crear</button>
+            </div>
+        </form>
+    </div>

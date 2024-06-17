@@ -1,0 +1,256 @@
+<div class="flex flex-col max-w-240 md:min-w-160 max-h-screen -m-6">
+ 
+  <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+       <h2 class="text-lg font-medium">Información Beneficiario</h2>
+       <h2 class="text-lg font-medium" [hidden]="!showOnlyName">Edad:
+           {{ageFromDate(beneficiario?.nacimiento)}}</h2>
+       <button (click)="close()" mat-icon-button [tabIndex]="-1">
+           <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+       </button>
+   </div>
+
+        <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" *ngIf="documentoActive == false"
+            [formGroup]="filtro">
+  
+          <div class="cont-a">
+          <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+              <mat-label>Nombre del beneficiario</mat-label>
+              <input matInput type="text" placeholder="..." formControlName="nombre" />
+            </mat-form-field>
+  
+            <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+              <mat-label>Tipo</mat-label>
+              <mat-select formControlName="tipo" placeholder="..." #singleSelect>
+                <mat-option value="1" >Conyugue </mat-option>
+                <mat-option value="2" >Hijo</mat-option>
+                <mat-option value="3" >Padres</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+               <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="nacimiento" placeholder="Rango de fecha"
+                      autocomplete="off" />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+              <div class="cont-a">
+                      <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                        <mat-label>Tipo documento</mat-label>
+                        <mat-select formControlName="tipo_documento" placeholder="..." #singleSelect>
+                          <mat-option value="Cedula">Cedula </mat-option>
+                          <mat-option value="PEP">PEP</mat-option>
+                          <mat-option value="Pasaporte">Pasaporte</mat-option>
+                          <mat-option value="CC">CC </mat-option>
+                          <mat-option value="TI">TI</mat-option>
+                          <mat-option value="RC">RC</mat-option>
+                          <mat-option value="PAS">PAS</mat-option>
+                          <mat-option value="PT">PT</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+             <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+              <mat-label>Documento</mat-label>
+              <input matInput type="text" placeholder="..." formControlName="documento" />
+            </mat-form-field>
+          </div>
+      </form>
+
+    <div class="p-10" *ngIf="documentoActive == true">
+
+      <fuse-alert [hidden]="!showOnlyName" [appearance]="'border'" [type]="'info'">
+          <div class="text-1xl md:text-1xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+              Infomación</div>
+          <div class="ml-1.5 leading-6 truncate text-secondary">
+              Requeridos: Cedula, Contrato Laboral, Examen Médico, Hoja de vida.
+          </div>
+      </fuse-alert>
+     
+
+      <div [hidden]="!showOnlyName" class="cont-d-a" style="flex-grow: 1;">
+        <div class="cont-table">
+      <form [formGroup]="uploadForm">
+
+          <br />
+          <input formControlName="document" type="file" ng2FileSelect class="file-select" [uploader]="uploader"
+              multiple /><br />
+          <br />
+          <!-- <div style="height: 150px;background: #f2f2f2;" class="drop-zone">
+                                <div ng2FileDrop [uploader]="uploader" class="drop-zone arrastrar-documentos">
+                                    Arrastra y suelta los archivos aquí
+                                </div>
+                            </div> -->
+          <br>
+          <table style="margin-top: 20px;">
+              <thead>
+                  <tr>
+                      <th width="20%">Nombre</th>
+                      <th width="20%">Tamaño</th>
+                      <!-- <th width="20%">Progreso</th> -->
+                      <th width="20%">Estado</th>
+                      <!-- <th width="20%">Acciones</th> -->
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of uploader.queue">
+                      <td class="text-center">
+                          <strong>{{ item?.file?.name }}</strong>
+                      </td>
+                      <td class="text-center" nowrap>
+                          {{ item?.file?.size / 1024 / 1024 | number: '.2' }} MB</td>
+                      <!-- <td>
+                                            <div style="margin: 1px;" class="progress">
+                                                <div class="progress-bar" role="progressbar"
+                                                    [ngStyle]="{ 'width': item.progress + '%' }">
+                                                </div>
+                                            </div>
+                                        </td> -->
+                      <td class="text-center">
+                          <span *ngIf="item.isSuccess">
+                              <mat-icon svgIcon="check_circle_outline"></mat-icon>
+                          </span>
+                          <span *ngIf="item.isCancel">
+                              <mat-icon svgIcon="cancel"></mat-icon>
+                          </span>
+                          <span *ngIf="item.isError">
+                              <mat-icon svgIcon="remove_circle_outline"></mat-icon>
+                          </span>
+                      </td>
+                      <!-- <td nowrap>
+                                            <button (click)="item.upload()"
+                                                [disabled]="item.isReady || item.isUploading || item.isSuccess"
+                                                class="flex-auto" mat-flat-button [color]="'primary'">
+                                                Guardar
+                                            </button>
+                                            <button class="flex-auto" (click)="item.remove()" mat-stroked-button>
+                                                Eliminar
+                                            </button>
+                                        </td> -->
+                  </tr>
+              </tbody>
+          </table>
+          <br />
+          <div fxLayoutAlign="end ">
+              <!-- <div class="container">
+                                   <p style="color: #838383;font-size: medium;">Progreso:</p>
+                                   <div class="progress">
+                                       <div class="progress-bar" role="progressbar"
+                                           [ngStyle]="{ 'width': uploader.progress + '%' }">
+                                       </div>
+                                   </div>
+                               </div> -->
+              <button mat-flat-button [color]="'primary'" class="bg-green text-white border-button"
+                  (click)="uploader.uploadAll()" (click)="getRecordPlanillaMultimedia()"
+                  [disabled]="!uploader.getNotUploadedItems().length">
+                  Guardar
+              </button>
+
+              <!-- <button mat-flat-button [color]="'primary'"class="bg-red text-white ml-8 border-button"
+                                   (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                                   Cancelar
+                               </button> -->
+
+              <button mat-flat-button [color]="'primary'" class="bg-orange text-white ml-8 border-button"
+                  (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                  Remover
+              </button>
+          </div>
+      </form>
+
+          <table mat-table [dataSource]="imagen" class="table-100">
+     
+            <ng-container matColumnDef="nombre_documento">
+              <th mat-header-cell *matHeaderCellDef class="txt-left"> <strong>Nombre
+                  documento</strong> </th>
+              <td mat-cell *matCellDef="let element" class="txt-left"> {{element.description}}
+              </td>
+            </ng-container>
+            <!-- <ng-container matColumnDef="descripcion">
+                                        <th mat-header-cell *matHeaderCellDef class="txt-left"> 
+                                          <strong>Descripcion</strong> 
+                                         </th>
+                                        <td mat-cell *matCellDef="let element" class="txt-left"> {{element.description}}
+                                        </td>
+                                      </ng-container> -->
+     
+            <ng-container matColumnDef="fecha_guardado">
+              <th mat-header-cell *matHeaderCellDef class="enc-tabla"> <strong>Fecha de
+                  guardado</strong> </th>
+              <td mat-cell *matCellDef="let element"> {{element.created_at | date:"yyyy-MM-dd"}}
+              </td>
+            </ng-container>
+     
+            <ng-container matColumnDef="imagen">
+              <th mat-header-cell *matHeaderCellDef class="enc-tabla"> <strong>Documento</strong>
+              </th>
+              <td mat-cell *matCellDef="let element">
+     
+                <img download [src]="element.type == 1 ? element.url : 'assets/img/logo-pdf.png'" alt="Documento"
+                 style="width: 50px;" class=" selectable"> </td>
+            </ng-container>
+     
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef class="enc-tabla"> <strong>Acciones</strong>
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <a target="_blank" href="{{element.url}}" target="_blank" download>
+                  <button mat-icon-button class="color-azul-brand text-red-200" aria-label="">
+                    <mat-icon svgIcon="file_download"></mat-icon>
+
+                  </button>
+                </a>
+                <!-- <button (click)="openMultimediaModal(element)" mat-button class="color-azul-brand">
+                                            <mat-icon [icIcon]="eye"></mat-icon>
+                                          </button> -->
+                <!-- <button (click)="openMultimediaModal(element)" mat-button class="color-azul-brand">
+                  Agregar Nombre
+                </button> -->
+                <button mat-icon-button class="color-azul-brand text-red-200" aria-label=""
+                  (click)="deleteMultimedia(element)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+     
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsDocuments"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsDocuments;"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    
+
+<mat-dialog-actions class="p-6 sm:p-8" align="end">
+
+  <div class="cont-btns-modal" *ngIf="documentoActive == false">
+    
+    <span *ngIf="showOnlyName == true">
+      <button color="primary" *ngIf="independiente == true"  class="border-button"
+          (click)="saveDetails()"
+        mat-flat-button
+        >Actualizar
+       </button>
+    </span>
+    
+    <span *ngIf="showOnlyName == false">
+      <button *ngIf="independiente == true" [hidden]="showOnlyName" (click)="save()" mat-flat-button
+        class="border-button">Guardar
+      </button>
+    </span>
+        
+        <span *ngIf="showOnlyName == true">
+        <button color="primary" *ngIf="empleado == true" class="border-button"
+            (click)="saveDetailsEmpleado()"
+         mat-flat-button
+         >Actualizar</button>
+      </span>
+        <span *ngIf="showOnlyName == false">
+
+          <button color="primary" *ngIf="empleado == true" [hidden]="showOnlyName == true" (click)="saveEmpleado()"
+              mat-flat-button
+            class="border-button">Guardar</button>
+        </span>
+      <!-- <button (click)="close()" mat-flat-button class="border-button">Salir</button> -->
+  </div>
+</mat-dialog-actions>
+

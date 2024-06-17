@@ -1,0 +1,52 @@
+<div class="flex flex-col  max-h-screen -m-6">
+    <div *ngFor="let data of tableData; let i = index"
+        class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+        <h2 class="text-lg font-medium">Observaciones <strong>{{data.primer_nombre}}</strong></h2>
+        <button (click)="close()" mat-icon-button [tabIndex]="-1">
+            <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+        </button>
+    </div>
+    <br>
+    <div fxLayout="column" class="pl-10 pr-10" class="cont-content-modal">
+        <div class="cont-panel-agregar">
+            <form class="m-2" fxLayout="row" fxFlex [formGroup]="obs">
+                <input formControlName="description" appearance="outline" class="input-agregar"
+                    placeholder="Observación">
+                <button (click)="save()" mat-flat-button class="border-button" color="primary">Agregar</button>
+            </form>
+        </div>
+        <div class="cont-table">
+            <mat-dialog-actions>
+                <table mat-table [dataSource]="dataSource" class="table-100">
+                    <ng-container matColumnDef="descripcion">
+                        <th mat-header-cell *matHeaderCellDef class="txt-left"><strong>Descripcion</strong></th>
+                        <td mat-cell *matCellDef="let element" class="txt-left">
+                            {{ element.description }}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="fecha">
+                        <th mat-header-cell *matHeaderCellDef><strong>Fecha</strong></th>
+                        <td mat-cell *matCellDef="let element"> {{ element.created_at }} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </mat-dialog-actions>
+        </div>
+    </div>
+
+    <!-- <mat-dialog-actions>
+          <div fxLayoutAlign="end" class="cont-btns-modal">
+              <button mat-stroked-button (click)="close()" class="border-button" color="primary">Cerrar</button>
+              
+          </div>
+      </mat-dialog-actions> -->
+
+</div>
+
+
+
+
+
+

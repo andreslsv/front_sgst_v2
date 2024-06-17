@@ -1,0 +1,460 @@
+<div class="flex-auto h-full  dark:bg-transparent">
+
+    <div fxLayoutAlign="space-between"
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div fxLayoutAlign="space-between" class="margin-content" fxLayout="row">
+           <div class="mr-0 md:mr-20">
+    
+                <h1 class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate"
+                    style="margin-left: 30px;">Liquidación</h1>
+                         <div class="card-title-row">
+                             <h3 style="color:rgb(143, 143, 143);
+                       margin-left: 30px;
+                       font-weight: 600;" > Periodo {{currentRecord?.nombre_periodo}}</h3>
+                         </div>
+            </div>
+         <div fxLayout="row" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <button  color="primary" mat-flat-button style="margin: 10px;margin-right: 32px; border-radius: 30px;background-color: grey;">
+                Total Nomina  <strong>{{totalNomina | currency:'USD': 'symbol': '1.0-0'}}</strong>
+             </button>
+          
+            <button  color="primary" mat-flat-button style="margin: 10px;margin-right: 32px; border-radius: 30px; ">
+                Total Planilla
+                <strong>{{totalPlanilla | currency:'USD': 'symbol': '1.0-0'}}</strong>
+            </button>
+      
+              <button  color="primary" mat-flat-button style="margin: 10px;margin-right: 32px; border-radius: 30px; ">
+                  Total Pre. Sociales
+                  <strong>{{CesantiasTotal + totalIntereses + totalVacaciones| currency:'USD': 'symbol': '1.0-0'}}</strong>
+              </button>
+             
+         </div>
+    </div>
+      
+    </div>
+    <div class=" bg-card shadow rounded-2xl mr-5 ml-5 mt-10">
+        <div class=" pt-10">
+    
+            <mat-tab-group>
+                <mat-tab label="Nomina">
+                    <ng-template mat-tab-label>
+                       Nomina
+                        <button style="background: rgb(219, 219, 219);margin: 30px;" mat-icon-button>
+                             {{currentRecord?.detalleNomina?.length}}
+                        </button>
+                    </ng-template>
+                    <div class="column" style="padding: 10px;" #TABLE>
+                   
+                        <div  *ngIf="currentRecord?.status == 1"fxLayoutAlign="start start" class="cont-botones">
+                         <button (click)="exportNomina()" class="border-button" mat-flat-button
+                             style="background-color: #1d9f27;" class="btn-bg-azul">EXPORTAR A EXCEL <mat-icon>file_download
+                             </mat-icon></button>
+                             <button class="border-button" mat-flat-button (click)="openTirilla()" color="primary"
+                                 style="margin-left: 10px;">IMPRIMIR TODAS LAS TIRILLAS <mat-icon>print
+                             </mat-icon></button>
+                     </div>
+            
+                        <table #table mat-table [dataSource]="currentRecord?.detalleNomina" class="table-100">
+            
+                            <ng-container matColumnDef="nombre">
+                                <th mat-header-cell *matHeaderCellDef class="txt-left"> Nombre </th>
+                                <td mat-cell *matCellDef="let element" class="txt-left"> 
+                                    {{element.empleadoNomina?.primer_nombre}}
+                                    {{element.empleadoNomina?.segundo_nombre}}
+                                    {{element.empleadoNomina?.primer_apellido}}
+                                    {{element.empleadoNomina?.segundo_apellido}}
+                                       {{element.personaNomina?.primer_nombre}}
+                                       {{element.personaNomina?.primer_apellido}}
+                                 </td>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="salario_base">
+                                <th mat-header-cell *matHeaderCellDef> IBL </th>
+                                <td mat-cell *matCellDef="let element"> {{element.ibc - element.aux_transporte | currency:'USD': 'symbol': '1.0'}} </td>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="aux">
+                                <th mat-header-cell *matHeaderCellDef> Aux. Transporte</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.aux_transporte | currency:'USD': 'symbol': '1.0'}} </td>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="ss">
+                                <th mat-header-cell *matHeaderCellDef> SS </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{element.totalPlanilla | currency:'USD': 'symbol': '1.0'}}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="dias">
+                                <th mat-header-cell *matHeaderCellDef> Dias Laborados </th>
+                                <td mat-cell *matCellDef="let element">
+                                   <strong>{{element.dias_laborados }}</strong>
+                                    <mat-icon *ngIf="currentRecord?.status == 3" (click)="openDiasModal(element)"
+                                        svgIcon="today"
+                                        style="font-size: 20px; color: #000054; margin-left: 10px; cursor: pointer;" >
+                                    </mat-icon>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="o_ingreso">
+                                <th mat-header-cell *matHeaderCellDef>Ingreso constitutivo</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div *ngIf="element.otros_ingresos == null">
+                                        <mat-icon  *ngIf="currentRecord?.status == 3" (click)="openOtrosModal(element)" 
+                                            style=" color: #000054; margin-left: 10px; cursor: pointer;" >
+                                            add_circle
+                                        </mat-icon>
+                                    </div>
+                                    <div *ngIf="element.otros_ingresos != null">
+                                        <strong>{{element.otros_ingresos  | currency:'USD': 'symbol': '1.0-0'}}</strong>
+                                           <mat-icon  *ngIf="currentRecord?.status == 3" (click)="openOtrosEditModal(element)" 
+                                              style=" color: #000054; margin-left: 10px; cursor: pointer;" >
+                                         add_circle
+                                            </mat-icon>
+                                     </div>
+                                </td>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="n_ingreso">
+                                <th mat-header-cell *matHeaderCellDef>Ingreso no constitutivo </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div *ngIf="element.ingreso_noc == null">
+                                        <mat-icon *ngIf="currentRecord?.status == 3" (click)="openOtrosNoModal(element)"
+                                            style=" color: #000054; margin-left: 10px; cursor: pointer;" >
+                                            add_circle
+                                        </mat-icon>
+                                    </div>
+                                    <div *ngIf="element.ingreso_noc != null">
+                                        <strong>{{element.ingreso_noc  | currency:'USD': 'symbol': '1.0-0'}}</strong>
+                                           <mat-icon *ngIf="currentRecord?.status == 3"
+                                               (click)="openOtrosNoEditModal(element)"
+                                              style=" color: #000054; margin-left: 10px; cursor: pointer;" >
+                                         add_circle
+                                            </mat-icon>
+                                     </div>
+                                </td>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="h_extras">
+                                <th mat-header-cell *matHeaderCellDef> H. Extras </th>
+                                <td mat-cell *matCellDef="let element">
+                                 <div *ngIf="element.horas_extras != null">
+                                     <strong>{{element.horas_extras | currency:'USD': 'symbol': '1.0-0'}} </strong>
+                                     <mat-icon  *ngIf="currentRecord?.status == 3" (click)="openHorasModalEdit(element)"
+                                          style=" color: #000054; margin-left: 10px; cursor: pointer;" >
+                                          add_circle
+                                     </mat-icon>
+                                 </div>
+                                 <div *ngIf="element.horas_extras == null">
+                                     <mat-icon  *ngIf="currentRecord?.status == 3" (click)="openHorasModal(element)" 
+                                         style=" color: #000054; margin-left: 10px; cursor: pointer;" >
+                                    add_circle
+                                        </mat-icon>
+                                 </div>
+                                 
+                                </td>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="deducciones">
+                                <th mat-header-cell *matHeaderCellDef> Deducciones </th>
+                                <td mat-cell *matCellDef="let element">
+                                     <div *ngIf="element.deducciones == null">
+                                            <mat-icon  *ngIf="currentRecord?.status == 3" (click)="openDeduccionesModal(element)" 
+                                                style=" color: #000054; margin-left: 10px; cursor: pointer;"
+                                                >add_circle</mat-icon>
+                                     </div>
+                                    <div *ngIf="element.deducciones != null">
+                                        <strong>{{element.deducciones  | currency:'USD': 'symbol': '1.0-0'}}</strong>
+                                          <mat-icon  *ngIf="currentRecord?.status == 3" (click)="openDeduccionesEditModal(element)"
+                                             style=" color: #000054; margin-left: 10px; cursor: pointer;"
+                                             >add_circle</mat-icon>
+                                    </div>
+                                </td>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="total_pagar">
+                                <th mat-header-cell *matHeaderCellDef> Total a pagar </th>
+                                <td mat-cell *matCellDef="let element">
+                                  {{
+                                    
+                                    element.totalNomina | currency:'USD': 'symbol': '1.0-0'
+                                     
+                                }}
+                                </td>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="acciones">
+                                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                                <td mat-cell *matCellDef="let element">
+            
+                                    <button (click)="openDesprendible(element.id)" mat-icon-button class="color-azul" type="button">
+                                        <mat-icon >description</mat-icon>
+                                    </button>
+            
+                                    <!-- <button mat-icon-button class="color-azul" type="button">
+                                        <mat-icon >visibility</mat-icon>
+                                    </button>
+            
+                                    <button mat-icon-button type="button" class="color-azul" [routerLink]="['../empresainfo']">
+                                        <mat-icon >settings
+    
+                                        </mat-icon>
+                                    </button> -->
+            
+            
+                                </td>
+                            </ng-container>
+            
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+            
+                        <div *ngIf="currentRecord?.status == 3" class="cont-botones">
+                          
+                            <button (click)="save()" class="border-button" mat-flat-button color="primary">
+                            <mat-icon>published_with_changes</mat-icon>
+                                Liquidar Nómina
+                            </button>
+                        </div>
+            
+                    </div>
+                </mat-tab>
+                <mat-tab label="Planilla">
+                      <ng-template mat-tab-label>
+                          Planilla
+                          <button style="background: rgb(219, 219, 219);margin: 30px;" mat-icon-button>
+                              {{currentRecord?.detalleNomina?.length}}
+                          </button>
+                      </ng-template>
+                    <div class="column" #PLANILLA style="padding: 10px;">
+                        
+                      <div  *ngIf="currentRecord?.status == 1"fxLayoutAlign="start start" class="cont-botones">
+                          <button class="border-button" mat-flat-button color="primary" (click)="exportPlanilla()"
+                              style="background-color: #1d9f27;" class="btn-bg-azul">EXPORTAR
+                              A
+                              EXCEL <mat-icon >file_download
+                              </mat-icon></button>
+                      </div>
+            
+                           <table #planilla mat-table [dataSource]="currentRecord?.detalleNomina" class="table-100">
+    
+                               <ng-container matColumnDef="nombre">
+                                   <th mat-header-cell *matHeaderCellDef class="txt-left"> Nombre </th>
+                                   <td mat-cell *matCellDef="let element" class="txt-left">                            
+                                    {{element.empleadoNomina?.primer_nombre}}
+                                    {{element.empleadoNomina?.segundo_nombre}}
+                                    {{element.empleadoNomina?.primer_apellido}}
+                                    {{element.empleadoNomina?.segundo_apellido}}  
+                                       {{element.personaNomina?.primer_nombre}}
+                                       {{element.personaNomina?.primer_apellido}}
+                                </td>
+                               </ng-container>
+    
+                               <ng-container matColumnDef="salario_base">
+                                   <th mat-header-cell *matHeaderCellDef>IBC </th>
+                                   <td mat-cell *matCellDef="let element"> {{element.ibl | currency:'USD': 'symbol': '1.0'}} </td>
+                               </ng-container>
+    
+                                <ng-container matColumnDef="dias">
+                                   <th mat-header-cell *matHeaderCellDef> Dias</th>
+                                   <td mat-cell *matCellDef="let element"> {{element.dias_laborados }} </td>
+                               </ng-container>
+                            
+                               <ng-container matColumnDef="ss">
+                                   <th mat-header-cell *matHeaderCellDef> % </th>
+                                   <td mat-cell *matCellDef="let element"> 4 </td>
+                               </ng-container>
+                               <ng-container matColumnDef="salud">
+                                   <th mat-header-cell *matHeaderCellDef> Salud</th>
+                                   <td mat-cell *matCellDef="let element"> {{element.salud | currency:'USD': 'symbol': '1.0'}} </td>
+                               </ng-container>
+                               <ng-container matColumnDef="o_ingreso">
+                                   <th mat-header-cell *matHeaderCellDef> % </th>
+                                   <td mat-cell *matCellDef="let element">16
+                                   </td>
+                               </ng-container>
+    
+                               <ng-container matColumnDef="h_extras">
+                                   <th mat-header-cell *matHeaderCellDef> Pension </th>
+                                   <td mat-cell *matCellDef="let element">{{element.pension | currency:'USD': 'symbol': '1.0'}}
+                                   </td>
+                               </ng-container>
+    
+                               <ng-container matColumnDef="deducciones">
+                                   <th mat-header-cell *matHeaderCellDef> % </th>
+                                   <td mat-cell *matCellDef="let element">{{element.arl}}
+                                   </td>
+                               </ng-container>
+    
+                               <ng-container matColumnDef="total_pagar">
+                                   <th mat-header-cell *matHeaderCellDef>ARL </th>
+                                   <td mat-cell *matCellDef="let element">{{element.riesgo | currency:'USD': 'symbol': '1.0'}} </td>
+                               </ng-container>
+    
+                               <ng-container matColumnDef="acciones">
+                                   <th mat-header-cell *matHeaderCellDef> CCF </th>
+                                   <td mat-cell *matCellDef="let element">
+                                    {{element.ccf | currency:'USD': 'symbol': '1.0'}}
+                                   </td>
+                               </ng-container>
+    
+                               <ng-container matColumnDef="sena">
+                                   <th mat-header-cell *matHeaderCellDef> SENA </th>
+                                   <td mat-cell *matCellDef="let element">
+                                    {{element.sena | currency:'USD': 'symbol': '1.0'}}
+                                   </td>
+                               </ng-container>
+                               <ng-container matColumnDef="icdf">
+                                   <th mat-header-cell *matHeaderCellDef> ICBF </th>
+                                   <td mat-cell *matCellDef="let element">
+                                    {{element.icdf | currency:'USD': 'symbol': '1.0'}}
+                                   </td>
+                               </ng-container>
+                                <ng-container matColumnDef="total">
+                                    <th mat-header-cell *matHeaderCellDef> Total </th>
+                                    <td mat-cell *matCellDef="let element">
+                                    <strong>
+                                        {{element.totalPlanilla | currency:'USD': 'symbol': '1.0'}}
+                                    </strong>
+                                    </td>
+                                </ng-container>
+                               <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                               <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                           </table>
+                    </div>
+                </mat-tab>
+                           <mat-tab label="Planilla">
+                      <ng-template mat-tab-label>
+                          Prestaciones Sociales
+                          <button style="background: rgb(219, 219, 219);margin: 30px;" mat-icon-button>
+                              {{currentRecord?.detalleNomina?.length}}
+                          </button>
+                      </ng-template>
+                    <div class="column" #PRESTACIONES style="padding: 10px;">
+                        
+                      <div  *ngIf="currentRecord?.status == 1"fxLayoutAlign="start start" class="cont-botones">
+                          <button (click)="exportPrestaciones()" style="background-color: #1d9f27;"
+                              class="border-button" mat-flat-button color="primary">
+                              EXPORTAR
+                              A
+                              EXCEL 
+                              <mat-icon >file_download
+                              </mat-icon>
+                            </button>
+                      </div>
+            
+                             <table #prestaciones mat-table [dataSource]="currentRecord?.detalleNomina" class="table-100">
+    
+                                 <ng-container matColumnDef="nombre">
+                                     <th mat-header-cell *matHeaderCellDef class="txt-left"> Nombre </th>
+                                     <td mat-cell *matCellDef="let element" class="txt-left">
+                                         {{element.empleadoNomina?.primer_nombre}}
+                                         {{element.empleadoNomina?.segundo_nombre}}
+                                         {{element.empleadoNomina?.primer_apellido}}
+                                         {{element.empleadoNomina?.segundo_apellido}}
+                                         {{element.personaNomina?.primer_nombre}}
+                                         {{element.personaNomina?.primer_apellido}}
+                                     </td>
+                                 </ng-container>
+    
+                                 <ng-container matColumnDef="salario_base">
+                                     <th mat-header-cell *matHeaderCellDef> N° documento </th>
+                                     <td mat-cell *matCellDef="let element">
+                                         {{element.empleadoNomina?.numero_documento}} </td>
+                                 </ng-container>
+    
+                                 <ng-container matColumnDef="aux">
+                                     <th mat-header-cell *matHeaderCellDef> Dias</th>
+                                     <td mat-cell *matCellDef="let element">
+                                        {{element.dias_laborados }}
+                                     </td>
+                                 </ng-container>
+    
+                                 <ng-container matColumnDef="ss">
+                                     <th mat-header-cell *matHeaderCellDef> Cesantias </th>
+                                     <td mat-cell *matCellDef="let element">
+                                         {{element.cesantias| currency:'USD': 'symbol': '1.0'}}
+                                     </td>
+                                 </ng-container>
+    
+                                 <ng-container matColumnDef="prima">
+                                     <th mat-header-cell *matHeaderCellDef>Primas </th>
+                                     <td mat-cell *matCellDef="let element">
+                                         {{element.cesantias| currency:'USD': 'symbol': '1.0'}}
+                                     </td>
+                                 </ng-container>
+                                 
+                                 <ng-container matColumnDef="dias">
+                                     <th mat-header-cell *matHeaderCellDef> Intereses </th>
+                                     <td mat-cell *matCellDef="let element">
+                                         <strong>{{element.intereses | currency:'USD': 'symbol': '1.0'}}</strong>
+    
+                                     </td>
+                                 </ng-container>
+                                 <ng-container matColumnDef="o_ingreso">
+                                     <th mat-header-cell *matHeaderCellDef>Vacaciones </th>
+                                     <td mat-cell *matCellDef="let element">
+                                         <div>
+                                             <strong>{{element.vacaciones | currency:'USD': 'symbol': '1.0'}}</strong>
+                                     
+                                         </div>
+                                     </td>
+                                 </ng-container>
+    
+                                 <ng-container matColumnDef="h_extras">
+                                     <th mat-header-cell *matHeaderCellDef>Liquidacion total</th>
+                                     <td mat-cell *matCellDef="let element">
+                                         <div >
+                                             <strong>{{element.cesantias + element.intereses + element.vacaciones | currency:'USD': 'symbol': '1.0-0'}} </strong>
+                                
+                                         </div>
+                                     </td>
+                                 </ng-container>
+    
+                                 <ng-container matColumnDef="deducciones">
+                                     <th mat-header-cell *matHeaderCellDef> Indemnización </th>
+                                     <td mat-cell *matCellDef="let element">
+    
+                                         <div>
+                                             <strong>{{0  | currency:'USD': 'symbol': '1.0-0'}}</strong>
+                                    
+                                         </div>
+                                     </td>
+                                 </ng-container>
+    
+                   
+                               <ng-container matColumnDef="total_pagar">
+                                   <th mat-header-cell *matHeaderCellDef>Salario base </th>
+                                   <td mat-cell *matCellDef="let element"> {{element.ibc | currency:'USD': 'symbol': '1.0'}}
+                                   </td>
+                               </ng-container>
+                                 <ng-container matColumnDef="acciones">
+                                     <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                                     <td mat-cell *matCellDef="let element">
+    
+                                         <button (click)="DetalleEmpleado(element.empleadoNomina.id)" mat-icon-button
+                                             class="color-azul" type="button">
+                                             <mat-icon >visibility</mat-icon>
+                                         </button>
+    
+                                         <!-- <button mat-icon-button type="button" class="color-azul"
+                                             [routerLink]="['../empresainfo']">
+                                             <mat-icon >settings
+    
+                                             </mat-icon>
+                                         </button> -->
+    
+    
+                                     </td>
+                                 </ng-container>
+    
+                                 <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+                                 <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+                             </table>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    
+        
+    </div>
+</div>

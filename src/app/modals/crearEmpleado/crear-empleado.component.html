@@ -1,0 +1,381 @@
+<div class="flex flex-col  max-h-screen -m-6">
+
+  <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+      <div class="text-lg font-medium">Nuevo Empleado</div>
+      <div class="text-lg font-medium"> {{data.razonSocial}}</div>
+      <button (click)="close()" mat-icon-button [tabIndex]="-1">
+          <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+      </button>
+  </div>
+<form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="solicitud" (ngSubmit)="save()">
+
+   <mat-horizontal-stepper [linear]="isLinear" #stepper>
+     <mat-step [stepControl]="firstFormGroup">
+       <ng-template matStepLabel>Datos Personales</ng-template>
+     <br>
+     <br>
+     <div class="cont-a">
+
+       <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+         <mat-label>Primer nombre</mat-label>
+         <input matInput type="text" placeholder="..." formControlName="primer_nombre" />
+         <mat-error *ngIf="solicitud.get('primer_nombre').invalid">{{ getErrorPrimerNombre() }}</mat-error>
+       </mat-form-field>
+
+
+
+       <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+         <mat-label>Segundo nombre</mat-label>
+         <input matInput type="text" placeholder="..." formControlName="segundo_nombre" />
+       </mat-form-field>
+
+
+
+       <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+         <mat-label>Primer apellido</mat-label>
+         <input matInput type="text" placeholder="..." formControlName="primer_apellido" />
+         <mat-error *ngIf="solicitud.get('primer_apellido').invalid">{{ getErrorPrimerApellido() }}</mat-error>
+       </mat-form-field>
+
+
+
+       <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+         <mat-label>Segundo apellido</mat-label>
+         <input matInput type="text" placeholder="..." formControlName="segundo_apellido" />
+       </mat-form-field>
+
+     </div>
+     <div class="cont-a">
+       <!-- <mat-form-field appearance="outline" class="mb-4 bold-form items-form"  class="item">
+           <mat-label>Tipo de documento</mat-label>
+           <input matInput type="text" placeholder="..." formControlName="tipo_documento" />
+       </mat-form-field> -->
+       <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+         <mat-label>Tipo de documento</mat-label>
+         <mat-select formControlName="tipo_documento" placeholder="..." #singleSelect>
+           <!-- <mat-option value="Cúcuta"> Cúcuta </mat-option> -->
+           <mat-option value="Cedula">Cedula</mat-option>
+           <mat-option value="PEP">PEP</mat-option>
+           <mat-option value="PPT">PPT</mat-option>
+           <mat-option value="Cedula de Extranjeria">Cedula de extranjeria</mat-option>
+         </mat-select>
+         <mat-error *ngIf="solicitud.get('tipo_documento').invalid">{{ getErrorTipoDocumento() }}</mat-error>
+       </mat-form-field>
+
+       <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+         <mat-label>Número de documento</mat-label>
+         <input matInput type="text" placeholder="..." formControlName="numero_documento" />
+         <mat-error *ngIf="solicitud.get('numero_documento').invalid">{{ getErrorDocumento() }}</mat-error>
+       </mat-form-field>
+
+       <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item" style="flex-grow: 1">
+         <mat-label>Departamento</mat-label>
+         <mat-select formControlName="departamento" placeholder="..." #singleSelect>
+           <!-- <mat-option value="Cúcuta"> Cúcuta </mat-option> -->
+           <mat-option value="Amazonas">Amazonas</mat-option>
+           <mat-option value="Antioquia">Antioquia</mat-option>
+           <mat-option value="Arauca">Arauca</mat-option>
+           <mat-option value="Atlántico">Atlántico</mat-option>
+           <mat-option value="Bolívar">Bolívar</mat-option>
+           <mat-option value="Boyacá">Boyacá</mat-option>
+           <mat-option value="Caldas">Caldas</mat-option>
+           <mat-option value="Caquetá">Caquetá</mat-option>
+           <mat-option value="Casanare">Casanare</mat-option>
+           <mat-option value="Cauca">Cauca</mat-option>
+           <mat-option value="Cesar">Cesar</mat-option>
+           <mat-option value="Chocó">Chocó</mat-option>
+           <mat-option value="Córdoba">Córdoba</mat-option>
+           <mat-option value="Cundinamarca">Cundinamarca</mat-option>
+           <mat-option value="Guainía">Guainía</mat-option>
+           <mat-option value="Guaviare">Guaviare</mat-option>
+           <mat-option value="Huila">Huila</mat-option>
+           <mat-option value="La Guajira">La Guajira</mat-option>
+           <mat-option value="Magdalena">Magdalena</mat-option>
+           <mat-option value="Meta">Meta</mat-option>
+           <mat-option value="Nariño">Nariño</mat-option>
+           <mat-option value="Norte de Santander">Norte de Santander</mat-option>
+           <mat-option value="Putumayo">Putumayo</mat-option>
+           <mat-option value="Quindío">Quindío</mat-option>
+           <mat-option value="Risaralda">Risaralda</mat-option>
+           <mat-option value="San Andrés y Providencia">San Andrés y Providencia</mat-option>
+           <mat-option value="Santander">Santander</mat-option>
+           <mat-option value="Sucre">Sucre</mat-option>
+           <mat-option value="Tolima">Tolima</mat-option>
+           <mat-option value="Valle del Cauca">Valle del Cauca</mat-option>
+           <mat-option value="Vaupés">Vaupés</mat-option>
+           <mat-option value="Vichada">Vichada</mat-option>
+         </mat-select>
+       </mat-form-field>
+
+       <!-- <mat-form-field appearance="outline" class="mb-4 bold-form items-form"  class="item">
+     <mat-label>Ciudad</mat-label>
+     <input matInput type="text" placeholder="..." formControlName="ciudad" />
+   </mat-form-field> -->
+       <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+         <mat-label>Ciudad</mat-label>
+         <mat-select formControlName="ciudad" placeholder="..." #singleSelect>
+           <mat-option>
+             <ngx-mat-select-search [formControl]="CiudadesFilterCtrl"
+               placeholderLabel="Buscar por código o palabra clave"
+               noEntriesFoundLabel="'No se encontraron resultados'" [searching]="searchingCiudad">
+             </ngx-mat-select-search>
+           </mat-option>
+           <mat-option *ngFor="let data of filtereddataCiudades | async" [value]="data.nombre">
+             {{data.nombre}}
+           </mat-option>
+         </mat-select>
+       </mat-form-field>
+     </div>
+
+     <div class="cont-a">
+
+       <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+         <mat-label>Móvil(Celular)</mat-label>
+         <input matInput type="number" placeholder="..." formControlName="movil" />
+       </mat-form-field>
+
+       <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+         <mat-label>Direccion</mat-label>
+         <input matInput type="text" placeholder="..." formControlName="direccion" />
+       </mat-form-field>
+
+     </div>
+     <div class="cont-a">
+
+       <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+         <mat-label>Email</mat-label>
+         <input matInput type="email" placeholder="..." formControlName="email" />
+       </mat-form-field>
+
+     </div>
+      <div fxLayoutAlign="end">
+        <button class="border-button" mat-flat-button color="primary"  matStepperNext>Siguiente</button>
+      </div>
+     </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
+        <ng-template matStepLabel>Contratación</ng-template>
+          <br>
+          <br>
+          <div class="cont-a">
+            <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+              <mat-label>Tipo contrato</mat-label>
+              <mat-select formControlName="tipoContrato" placeholder="..." #singleSelect>
+                <!-- <mat-option value="Cúcuta"> Cúcuta </mat-option> -->
+                <mat-option value="1">Termino indefinido</mat-option>
+                <mat-option value="2">Termino fijo</mat-option>
+                <mat-option value="3">Obra o labor</mat-option>
+                <mat-option value="4">Aprendiz</mat-option>
+                <mat-option value="5">Tiempo parcial</mat-option>
+                <mat-option value="6">Tiempo completo</mat-option>
+                <mat-option value="7">Medio tiempo</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="cont-a">
+            <!-- <mat-form-field appearance="outline" class="mb-4 bold-form items-form"  class="item">
+        <mat-label>cargo</mat-label>
+        <input matInput type="text" placeholder="..." formControlName="cargo" />
+      </mat-form-field> -->
+            <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+              <mat-label>cargo</mat-label>
+              <mat-select formControlName="cargo" placeholder="..." #singleSelect>
+                <mat-option (keyup.control.c)="openCargoModal()">
+                  <ngx-mat-select-search [formControl]="CargoFilterCtrl" placeholderLabel="Buscar por nombre"
+                    noEntriesFoundLabel="'No se encontraron Presiona CONTROL + C para crear'"
+                    [searching]="searchingCargo">
+                  </ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let data of filtereddataCargo | async" [value]="data.nombre">
+                  {{data.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+              <mat-label>riesgo</mat-label>
+              <mat-select formControlName="riesgo" placeholder="..." #singleSelect>
+                <mat-option value="1">1</mat-option>
+                <mat-option value="2">2</mat-option>
+                <mat-option value="3">3</mat-option>
+                <mat-option value="4">4</mat-option>
+                <mat-option value="5">5</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+              <mat-label>Periodo de pago</mat-label>
+              <mat-select formControlName="periodo_de_pago" placeholder="..." #singleSelect>
+                <mat-option value="1">Quincenal</mat-option>
+                <mat-option value="2">Mensual</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+              <mat-label>Tipo Vinculación</mat-label>
+              <mat-select formControlName="tipoVinculacion" placeholder="..." #singleSelect>
+                <mat-option value="1">afiliacion inicial</mat-option>
+                <mat-option value="2">reintegro</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+          <div class="cont-a">
+
+            <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+              <mat-label>Salario base</mat-label>
+              <input min="1000000" matInput type="number" placeholder="..." formControlName="salario_base" />
+              <mat-error *ngIf="solicitud.get('salario_base').invalid">{{ getErrorMessage() }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+              <mat-label>Subsidio de transporte</mat-label>
+              <input min="117172" matInput type="number" placeholder="$" formControlName="subsidio_transporte" />
+              <mat-error *ngIf="solicitud.get('subsidio_transporte').invalid">{{ getErrorTransporte() }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+              <mat-label>Fecha de ingreso</mat-label>
+              <input matInput [matDatepicker]="birthPicker" formControlName="fecha_ingreso" placeholder="Seleccione"
+                autocomplete="off" />
+              <mat-datepicker-toggle matSuffix [for]="birthPicker"></mat-datepicker-toggle>
+              <mat-datepicker #birthPicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+              <mat-label>Fecha de Retiro</mat-label>
+              <input matInput [matDatepicker]="birthPicker_1" formControlName="fecha_retiro" placeholder="Seleccione"
+                autocomplete="off" />
+              <mat-datepicker-toggle matSuffix [for]="birthPicker_1"></mat-datepicker-toggle>
+              <mat-datepicker #birthPicker_1></mat-datepicker>
+            </mat-form-field>
+
+
+          </div>
+          <br>
+          <br>
+          <div fxLayoutAlign="end">
+            <button class="border-button" mat-flat-button color="primary"  matStepperNext>Siguiente</button>
+          </div>
+     </mat-step>
+     <mat-step>
+       <ng-template matStepLabel>Seguridad Social</ng-template>
+               <br>
+               <br>
+               <div class="cont-a">
+
+                 <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+                   <mat-label>EPS</mat-label>
+                   <mat-select formControlName="eps" placeholder="..." #singleSelect>
+                     <mat-option>
+                       <ngx-mat-select-search [formControl]="EpsFilterCtrl"
+                         placeholderLabel="Buscar por código o palabra clave"
+                         noEntriesFoundLabel="'No se encontraron resultados'" [searching]="searchingEps">
+                       </ngx-mat-select-search>
+                     </mat-option>
+                     <mat-option *ngFor="let data of filtereddataEps | async" [value]="data.nombre">
+                       {{data.nombre}}
+                     </mat-option>
+                   </mat-select>
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+                   <mat-label>F de pensiones</mat-label>
+                   <mat-select formControlName="f_de_pensiones" placeholder="..." #singleSelect>
+                     <mat-option>
+                       <ngx-mat-select-search [formControl]="pensionFilterCtrl"
+                         placeholderLabel="Buscar por código o palabra clave"
+                         noEntriesFoundLabel="'No se encontraron resultados'" [searching]="searchingPension">
+                       </ngx-mat-select-search>
+                     </mat-option>
+                     <mat-option *ngFor="let data of filtereddataPension | async" [value]="data.nombre">
+                       {{data.nombre}}
+                     </mat-option>
+                   </mat-select>
+                 </mat-form-field>
+               </div>
+               <div class="cont-a">
+                 <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+                   <mat-label>Caja C.F</mat-label>
+                   <mat-select formControlName="caja_cf" placeholder="..." #singleSelect>
+                     <mat-option>
+                       <ngx-mat-select-search [formControl]="procFilterCtrl"
+                         placeholderLabel="Buscar por código o palabra clave"
+                         noEntriesFoundLabel="'No se encontraron resultados'" [searching]="searchingProcedures">
+                       </ngx-mat-select-search>
+                     </mat-option>
+                     <mat-option *ngFor="let data of filtereddataProcedure | async" [value]="data.nombre">
+                       {{data.nombre}}
+                     </mat-option>
+                   </mat-select>
+                 </mat-form-field>
+                 <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+                   <mat-label>Sucursal</mat-label>
+                   <mat-select formControlName="sucursal" placeholder="..." #singleSelect>
+                     <mat-option *ngFor="let data of dataSucursal" [value]="data.nombre">
+                       {{data.nombre}}
+                     </mat-option>
+                   </mat-select>
+                 </mat-form-field>
+                 <!-- <mat-form-field appearance="outline" class="mb-4 bold-form items-form items-form"  style="flex-grow: 1">
+         <mat-label>ARL</mat-label>
+         <mat-select formControlName="arl" placeholder="..." #singleSelect>
+           <mat-option value="Alfa S.A.">Alfa S.A.</mat-option>
+           <mat-option value="Aurora S.A">Aurora S.A</mat-option>
+           <mat-option value="Axa Colpatria.">Axa Colpatria.</mat-option>
+           <mat-option value="Bolívar">Bolívar</mat-option>
+           <mat-option value="Colmena.">Colmena.</mat-option>
+           <mat-option value="La Equidad">La Equidad</mat-option>
+           <mat-option value="Liberty.">Liberty.</mat-option>
+           <mat-option value="Mapfre">Mapfre</mat-option>
+           <mat-option value="Positiva">Positiva</mat-option>
+           <mat-option value="No tiene.">No tiene.</mat-option>
+         </mat-select>
+       </mat-form-field> -->
+               </div>
+       <!-- <div>
+         <button  mat-flat-button matStepperPrevious>Back</button>
+         <button  mat-flat-button (click)="stepper.reset()">Reset</button>
+       </div> -->
+          <div fxLayoutAlign="start start" fxLayout="column">
+            <mat-error style="font-size: 12px;" *ngIf="solicitud.get('primer_nombre').invalid"> Es requerido el primer nombre en el apartado
+              Datos Personales</mat-error>
+            <mat-error style="font-size: 12px;" *ngIf="solicitud.get('primer_apellido').invalid">Es requerido el primer apellido en el apartado
+              Datos Personales</mat-error>
+            <mat-error style="font-size: 12px;" *ngIf="solicitud.get('tipo_documento').invalid">Es requerido el tipo de documento en el apartado
+              Datos Personales</mat-error>
+            <mat-error style="font-size: 12px;" *ngIf="solicitud.get('numero_documento').invalid">Es requerido el documento en el
+              apartado Datos Personales</mat-error>
+            <mat-error style="font-size: 12px;" *ngIf="solicitud.get('salario_base').invalid">Es requerido el salario base en el apartado
+              contratacion</mat-error>
+            <mat-error style="font-size: 12px;" *ngIf="solicitud.get('subsidio_transporte').invalid">Es requerido el Subsidio de transporte en
+              el
+              apartado contratacion</mat-error>
+          </div>
+       <br>
+       <br>
+       <br>
+       <br>
+       
+        <div *ngIf="showOnlyName == true" fxLayout="row" fxLayoutAlign="end stretch" class="mt-6" style="width: 100%;">
+          <button mat-stroked-button class="border-button" color="primary" (click)="close()">Cerrar</button>
+          <button style="padding-left: 40px;padding-right: 40px;" [hidden]="sending" type="submit"
+            class="border-button" mat-flat-button color="primary">
+           Pre-Afiliar
+         </button>
+          <!-- <button style=" padding-left: 40px;padding-right: 40px;" [hidden]=" !sending" style="background: green;"
+            
+            class="border-button" mat-flat-button color="primary">Guardar</button> -->
+        </div>
+        <div *ngIf="serviceActive == true" fxLayout="row" fxLayoutAlign="end stretch" class="mt-6"
+          style="width: 100%;">
+          <!-- <button mat-stroked-button style="padding-left: 40px;padding-right: 40px;" class="border-button" color="primary"
+            (click)="close()">Cerrar</button> -->
+          <button style="padding-left: 40px;padding-right: 40px;" (click)="saveNewService()" style="background: green;"
+            class="border-button" mat-flat-button color="primary">Guardar</button>
+        </div>
+     </mat-step>
+   </mat-horizontal-stepper>
+  
+  </form>
+
+</div>
+
+  

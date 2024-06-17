@@ -1,0 +1,1084 @@
+<div class="flex-auto h-full  dark:bg-transparent">
+
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Inicio</a>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Detalle Empleado - {{currentRecord?.primer_nombre}}
+                    <!-- / Empresa -
+                    {{currentRecord?.empresa?.razon_social}} -->
+                </h2>
+            </div>
+        </div>
+        <!-- Actions -->
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <a mat-flat-button target="_blank" rel="noreferrer" [color]="'primary'">
+                <mat-icon>pending_actions</mat-icon>
+                Ult. Desprendible
+            </a>
+        </div>
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <a mat-flat-button target="_blank" rel="noreferrer" [color]="'primary'">
+                <mat-icon>contact_page</mat-icon>
+                Certificados
+            </a>
+        </div>
+
+    </div>
+    <div class=" bg-card shadow rounded-2xl m-10">
+        <div class=" p-10">
+            <section class="cont-pages">
+                <form [formGroup]="solicitud">
+                    <div class="home-card">
+
+                        <mat-tab-group>
+                            <mat-tab label="Datos Personales">
+                                <div class="w-full max-w-screen-xl mx-auto">
+
+                                    <br>
+                                    <br>
+                                    <div class="cont-a">
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Primer nombre</mat-label> -->
+                                            <input matInput type="text" placeholder="Primer nombre"
+                                                formControlName="primer_nombre" />
+                                        </mat-form-field>
+
+
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Segundo nombre</mat-label> -->
+                                            <input matInput type="text" placeholder="Segundo nombre"
+                                                formControlName="segundo_nombre" />
+                                        </mat-form-field>
+
+
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Primer apellido</mat-label> -->
+                                            <input matInput type="text" placeholder="Primer apellido"
+                                                formControlName="primer_apellido" />
+                                        </mat-form-field>
+
+
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Segundo apellido</mat-label> -->
+                                            <input matInput type="text" placeholder="Segundo apellido"
+                                                formControlName="segundo_apellido" />
+                                        </mat-form-field>
+
+                                    </div>
+
+                                    <div class="cont-a">
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Tipo de documento</mat-label> -->
+                                            <mat-select formControlName="tipo_documento" placeholder="Tipo de documento"
+                                                #singleSelect>
+                                                <!-- <mat-option value="Cúcuta"> Cúcuta </mat-option> -->
+                                                <mat-option value="Cedula">Cedula</mat-option>
+                                                <mat-option value="PEP">PEP</mat-option>
+                                                <mat-option value="Cedula de Extranjeria">Cedula de extranjeria
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Número de documento</mat-label> -->
+                                            <input matInput type="text" placeholder="Número de documento"
+                                                formControlName="numero_documento" />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="flex-auto" style="flex-grow: 1">
+                                            <!-- <mat-label>Departamento</mat-label> -->
+                                            <mat-select formControlName="departamento" placeholder="Departamento"
+                                                #singleSelect>
+                                                <!-- <mat-option value="Cúcuta"> Cúcuta </mat-option> -->
+                                                <mat-option value="Amazonas">Amazonas</mat-option>
+                                                <mat-option value="Antioquia">Antioquia</mat-option>
+                                                <mat-option value="Arauca">Arauca</mat-option>
+                                                <mat-option value="Atlántico">Atlántico</mat-option>
+                                                <mat-option value="Bolívar">Bolívar</mat-option>
+                                                <mat-option value="Boyacá">Boyacá</mat-option>
+                                                <mat-option value="Caldas">Caldas</mat-option>
+                                                <mat-option value="Caquetá">Caquetá</mat-option>
+                                                <mat-option value="Casanare">Casanare</mat-option>
+                                                <mat-option value="Cauca">Cauca</mat-option>
+                                                <mat-option value="Cesar">Cesar</mat-option>
+                                                <mat-option value="Chocó">Chocó</mat-option>
+                                                <mat-option value="Córdoba">Córdoba</mat-option>
+                                                <mat-option value="Cundinamarca">Cundinamarca</mat-option>
+                                                <mat-option value="Guainía">Guainía</mat-option>
+                                                <mat-option value="Guaviare">Guaviare</mat-option>
+                                                <mat-option value="Huila">Huila</mat-option>
+                                                <mat-option value="La Guajira">La Guajira</mat-option>
+                                                <mat-option value="Magdalena">Magdalena</mat-option>
+                                                <mat-option value="Meta">Meta</mat-option>
+                                                <mat-option value="Nariño">Nariño</mat-option>
+                                                <mat-option value="Norte de Santander">Norte de Santander</mat-option>
+                                                <mat-option value="Putumayo">Putumayo</mat-option>
+                                                <mat-option value="Quindío">Quindío</mat-option>
+                                                <mat-option value="Risaralda">Risaralda</mat-option>
+                                                <mat-option value="San Andrés y Providencia">San Andrés y Providencia
+                                                </mat-option>
+                                                <mat-option value="Santander">Santander</mat-option>
+                                                <mat-option value="Sucre">Sucre</mat-option>
+                                                <mat-option value="Tolima">Tolima</mat-option>
+                                                <mat-option value="Valle del Cauca">Valle del Cauca</mat-option>
+                                                <mat-option value="Vaupés">Vaupés</mat-option>
+                                                <mat-option value="Vichada">Vichada</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Ciudad</mat-label> -->
+                                            <input matInput type="text" placeholder="Ciudad" formControlName="ciudad" />
+                                        </mat-form-field>
+
+                                    </div>
+
+                                    <div class="cont-a">
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Móvil(Celular)</mat-label> -->
+                                            <input matInput type="number" placeholder="Móvil(Celular)"
+                                                formControlName="movil" />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Direccion</mat-label> -->
+                                            <input matInput type="text" placeholder="Direccion"
+                                                formControlName="direccion" />
+                                        </mat-form-field>
+
+                                    </div>
+                                    <div class="cont-a">
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Email</mat-label> -->
+                                            <input matInput type="email" placeholder="Email" formControlName="email" />
+                                        </mat-form-field>
+
+                                    </div>
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Contratación">
+                                <div class="w-full max-w-screen-xl mx-auto">
+                                    <br>
+                                    <br>
+                                    <div class="cont-a">
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Tipo contrato</mat-label> -->
+                                            <mat-select formControlName="tipoContrato" placeholder="Tipo contrato"
+                                                #singleSelect>
+                                                <!-- <mat-option value="Cúcuta"> Cúcuta </mat-option> -->
+                                                <mat-option value="1">Termino indefinido</mat-option>
+                                                <mat-option value="2">Termino fijo</mat-option>
+                                                <mat-option value="3">Obra o labor</mat-option>
+                                                <mat-option value="4">Aprendiz</mat-option>
+                                                <mat-option value="5">Tiempo parcial</mat-option>
+                                                <mat-option value="6">Tiempo completo</mat-option>
+                                                <mat-option value="7">Medio tiempo</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="cont-a">
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>cargo</mat-label> -->
+                                            <input matInput type="text" placeholder="Cargo" formControlName="cargo" />
+                                        </mat-form-field>
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>riesgo</mat-label> -->
+                                            <mat-select formControlName="riesgo" placeholder="Riesgo" #singleSelect>
+                                                <mat-option value="1">1</mat-option>
+                                                <mat-option value="2">2</mat-option>
+                                                <mat-option value="3">3</mat-option>
+                                                <mat-option value="4">4</mat-option>
+                                                <mat-option value="5">5</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Periodo de pago</mat-label> -->
+                                            <mat-select formControlName="periodo_de_pago" placeholder="Periodo de pago"
+                                                #singleSelect>
+                                                <mat-option value="1">Quincenal</mat-option>
+                                                <mat-option value="2">Mensual</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Tipo Vinculación</mat-label> -->
+                                            <mat-select formControlName="tipoVinculacion" placeholder="Tipo Vinculación"
+                                                #singleSelect>
+                                                <mat-option value="1">afiliacion inicial</mat-option>
+                                                <mat-option value="2">reintegro</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                    </div>
+                                    <div class="cont-a">
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Salario base</mat-label> -->
+                                            <input min="1000000" matInput type="number" placeholder="Salario base"
+                                                formControlName="salario_base" />
+                                            <mat-error *ngIf="solicitud.get('salario_base').invalid">
+                                                {{ getErrorMessage() }}</mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Subsidio de transporte</mat-label> -->
+                                            <input min="117172" matInput type="number"
+                                                placeholder="Subsidio de transporte"
+                                                formControlName="subsidio_transporte" />
+                                            <mat-error *ngIf="solicitud.get('subsidio_transporte').invalid">
+                                                {{ getErrorTransporte() }}
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Fecha de ingreso</mat-label> -->
+                                            <input matInput [matDatepicker]="birthPicker"
+                                                formControlName="fecha_ingreso" placeholder="Fecha de ingreso"
+                                                autocomplete="off" />
+                                            <mat-datepicker-toggle matSuffix [for]="birthPicker">
+                                            </mat-datepicker-toggle>
+                                            <mat-datepicker #birthPicker></mat-datepicker>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Fecha de Retiro</mat-label> -->
+                                            <input matInput [matDatepicker]="birthPicker_1"
+                                                formControlName="fecha_retiro" placeholder="Fecha de Retiro"
+                                                autocomplete="off" />
+                                            <mat-datepicker-toggle matSuffix [for]="birthPicker_1">
+                                            </mat-datepicker-toggle>
+                                            <mat-datepicker #birthPicker_1></mat-datepicker>
+                                        </mat-form-field>
+
+                                    </div>
+                                    <hr>
+
+                                    <h3 class="text-lg font-medium tracking-tight leading-6 truncate">
+                                        Documentos</h3>
+                                    <fuse-alert [appearance]="'border'" [type]="'info'">
+                                        <div
+                                            class="text-1xl md:text-1xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                                            Infomación</div>
+                                        <div class="ml-1.5 leading-6 truncate text-secondary">
+                                            Requeridos: Dale click en el boton subir para cargar los Documento de
+                                            Contratacion del empleado.
+                                        </div>
+                                    </fuse-alert>
+                                    <br>
+                                    <button (click)="openDocumentosModalContrato()" color="primary"
+                                        class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4"
+                                        mat-flat-button>
+                                        <mat-icon  style=" margin-right: 5px;">
+                                            file_upload
+                                        </mat-icon>
+                                        Subir
+                                    </button>
+
+                                    <table mat-table [dataSource]="imagenContrato" class="table-100">
+
+                                        <ng-container matColumnDef="nombre_documento">
+                                            <th mat-header-cell *matHeaderCellDef class="txt-left">
+                                                <strong>Nombre
+                                                    documento</strong> </th>
+                                            <td mat-cell *matCellDef="let element" class="txt-left">
+                                                {{element.name}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="descripcion">
+                                            <th mat-header-cell *matHeaderCellDef class="txt-left">
+                                                <strong>Descripcion</strong>
+                                            </th>
+                                            <td mat-cell *matCellDef="let element" class="txt-left">
+                                                {{element.description}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="fecha_guardado">
+                                            <th mat-header-cell *matHeaderCellDef class="enc-tabla">
+                                                <strong>Fecha de
+                                                    guardado</strong> </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                {{element.created_at | date:"yyyy-MM-dd"}}
+                                            </td>
+                                        </ng-container>
+
+                                        <!-- <ng-container matColumnDef="imagen">
+                                                          <th mat-header-cell *matHeaderCellDef class="enc-tabla">
+                                                              <strong>Documento</strong>
+                                                          </th>
+                                                          <td mat-cell *matCellDef="let element">
+             
+                                                              <img download
+                                                                  [src]="element.type == 1 ? element.url : 'assets/img/logo-pdf.png'"
+                                                                  alt="Documento" class="w-150 selectable"> </td>
+                                                      </ng-container> -->
+
+                                        <ng-container matColumnDef="acciones">
+                                            <th mat-header-cell *matHeaderCellDef class="enc-tabla">
+                                                <strong>Acciones</strong>
+                                            </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <a target="_blank" href="{{element.url}}">
+
+                                                    <mat-icon>visibility</mat-icon>
+                                                </a>
+                                                <!-- <button (click)="openMultimediaModal(element)"  mat-flat-button[color]="'primary'">
+                                                    <mat-icon [icIcon]="eye"></mat-icon>
+                                                  </button> -->
+                                                <button (click)="openMultimediaModal(element)" mat-icon-button>
+                                                    <mat-icon title="Agregar Descripcion" svgIcon="add_comment">
+                                                    </mat-icon>
+                                                </button>
+                                                <button mat-icon-button aria-label=""
+                                                    (click)="deleteMultimedia(element)">
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                            </td>
+                                        </ng-container>
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumnsDocuments2">
+                                        </tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumnsDocuments2;"></tr>
+                                    </table>
+                                </div>
+                            </mat-tab>
+
+                            <mat-tab label="Seguridad Social">
+                                <div class="w-full max-w-screen-xl mx-auto">
+                                    <div fxLayout="row" fxLayoutAlign="end stretch" class="mt-6" style="width: 100%;">
+                                        <button class="border-button" mat-flat-button color="primary"
+                                            (click)="saveDetails()">
+                                            <mat-icon>save</mat-icon>
+                                            Guardar
+                                        </button>
+                                    </div>
+                                    <br>
+                                    <br>
+
+                                    <div class="cont-a">
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>EPS</mat-label> -->
+                                            <mat-select formControlName="eps" placeholder="EPS" #singleSelect>
+                                                <mat-option *ngFor="let data of dataEps" [value]="data.nombre">
+                                                    {{data.nombre}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>F de pensiones</mat-label> -->
+                                            <mat-select formControlName="f_de_pensiones" placeholder="F. de pensiones"
+                                                #singleSelect>
+                                                <mat-option *ngFor="let data of dataPension" [value]="data.nombre">
+                                                    {{data.nombre}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="cont-a">
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Caja C.F</mat-label> -->
+                                            <mat-select formControlName="caja_cf" placeholder="Caja C.F" #singleSelect>
+
+                                                <mat-option *ngFor="let data of dataCaja" [value]="data.nombre">
+                                                    {{data.nombre}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field class="flex-auto">
+                                            <!-- <mat-label>Sucursal</mat-label> -->
+                                            <mat-select formControlName="sucursal" placeholder="Sucursal" #singleSelect>
+                                                <mat-option *ngFor="let data of dataSucursal" [value]="data.nombre">
+                                                    {{data.nombre}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <hr>
+                                    <h3 class="text-lg font-medium tracking-tight leading-6 truncate">
+                                        Seguridad Social</h3>
+                                    <fuse-alert [appearance]="'border'" [type]="'info'">
+                                        <div
+                                            class="text-1xl md:text-1xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                                            Infomación</div>
+                                        <div class="ml-1.5 leading-6 truncate text-secondary">
+                                            Requeridos: Dale click en el boton subir para cargar los Documentos  Arl,
+                                            Eps, Pension.
+                                        </div>
+                                    </fuse-alert>
+                                    <br>
+                                    <button color="primary" (click)="openDocumentosModalSS()"
+                                        class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4"
+                                        mat-flat-button>
+                                        <mat-icon  style=" margin-right: 5px;">
+                                            file_upload
+                                        </mat-icon>
+                                        Subir
+                                    </button>
+                   
+
+                                    <table mat-table [dataSource]="imagenSS" class="table-100">
+
+                                        <ng-container matColumnDef="nombre_documento">
+                                            <th mat-header-cell *matHeaderCellDef class="txt-left">
+                                                <strong>Nombre
+                                                    documento</strong> </th>
+                                            <td mat-cell *matCellDef="let element" class="txt-left">
+                                                {{element.name}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="descripcion">
+                                            <th mat-header-cell *matHeaderCellDef class="txt-left">
+                                                <strong>Descripcion</strong>
+                                            </th>
+                                            <td mat-cell *matCellDef="let element" class="txt-left">
+                                                {{element.description}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="fecha_guardado">
+                                            <th mat-header-cell *matHeaderCellDef class="enc-tabla">
+                                                <strong>Fecha de
+                                                    guardado</strong> </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                {{element.created_at | date:"yyyy-MM-dd"}}
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="acciones">
+                                            <th mat-header-cell *matHeaderCellDef class="enc-tabla">
+                                                <strong>Acciones</strong>
+                                            </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <a target="_blank" href="{{element.url}}">
+                                                    <button mat-icon-button aria-label="">
+                                                        <mat-icon svgIcon="remove_red_eye"></mat-icon>
+                                                    </button>
+                                                </a>
+
+                                                <button (click)="openMultimediaModal(element)" mat-icon-button>
+                                                    <mat-icon title="Agregar Descripcion" svgIcon="add_comment">
+                                                    </mat-icon>
+                                                </button>
+                                                <button mat-icon-button aria-label=""
+                                                    (click)="deleteMultimedia(element)">
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                            </td>
+                                        </ng-container>
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumnsDocuments2">
+                                        </tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumnsDocuments2;"></tr>
+                                    </table>
+
+                                </div>
+
+                            </mat-tab>
+                            <mat-tab label="Inf. Beneficiario">
+                                <div class="w-full max-w-screen-xl mx-auto">
+
+                                    <div fxLayoutAlign="start" class="cont-btn-navegacion">
+                                        <br>
+
+                                        <button class="border-button" mat-flat-button color="primary"
+                                            (click)="openBeneficiario(id)">
+                                            <mat-icon>add_circle</mat-icon>
+                                            Agregar
+                                        </button>
+
+                                    </div>
+
+
+                                    <div class="cont-e">
+                                        <div class="cont-e-a">
+
+                                            <div class="cont-table">
+                                                <table mat-table [dataSource]="beneficiado" class="table-100">
+
+                                                    <ng-container matColumnDef="nombre_beneficiario">
+                                                        <th mat-header-cell *matHeaderCellDef class="txt-left"> Nombre
+                                                            beneficiario
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element" class="txt-left">
+                                                            {{element.nombre}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="tipo">
+                                                        <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.tipo == 1 ? 'Conyugue' : element.tipo == 2 ? 'Hijo' : element.tipo == 3? 'Padres' : null}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="acciones">
+                                                        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <button (click)="openBeneficiario(element)"
+                                                                class="color-azul"
+                                                                style="padding: 10px 10px; margin-left: 15px;">
+                                                                <mat-icon svgIcon="remove_red_eye"></mat-icon>
+                                                            </button>
+                                                            <button class="color-azul">
+                                                                <mat-icon (click)="openBeneficiario2(element)">
+                                                                    upload_file</mat-icon>
+                                                            </button>
+                                                            <button (click)="delete(element)" class="icon-rojo"
+                                                                style="padding: 10px 10px;">
+
+                                                                <mat-icon svgIcon="delete"></mat-icon>
+                                                            </button> </td>
+                                                    </ng-container>
+
+                                                    <tr mat-header-row
+                                                        *matHeaderRowDef="beneficiarios_displayedColumns"></tr>
+                                                    <tr mat-row
+                                                        *matRowDef="let row; columns: beneficiarios_displayedColumns;">
+                                                    </tr>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <div class="cont-e-b">
+                                            <div class="cont-alerta">
+                                                <h3 class="text-lg font-medium tracking-tight leading-6 truncate">
+                                                    Documentos Solicitados</h3>
+                                                <p>
+                                                    Conyugue o compañero(a) permanente: Copia de la cédula.
+
+                                                    Hijos: copia del registro civil , si es mayor de 7 años también
+                                                    deberá adjuntar
+                                                    copia de la tarjeta de identidad, si es mayor a 12 años certificado
+                                                    de estudios,
+                                                    copia de la tarjeta de identidad y copia del registro civil.
+
+                                                    Hijos mayores de 18 años: Copia de la cédula de ciudadanía, Copia
+                                                    del registro
+                                                    civil de nacimiento (Solo tiene derecho a salud hasta los 25 años) .
+
+                                                    Padres: Copia de la cédula de ciudadanía y Copia del registro civil
+                                                    de nacimiento
+                                                    del cotizante.
+
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </mat-tab>
+                            <mat-tab label="Incapacidades">
+                                <div class="w-full max-w-screen-xl mx-auto">
+                                    <br>
+                                    <table class="table">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">Origen</th>
+                                                <th scope="col">Tipo</th>
+                                                <th scope="col">Inicio</th>
+                                                <th scope="col">Fin</th>
+                                                <th scope="col">Dias Otorgados</th>
+                                                <th scope="col">Dias Acumulados</th>
+                                                <th scope="col">Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of dataIncapacidad">
+                                                <th scope="row">
+                                                    {{
+                                                   data?.origen == 1 ? 'laboral' :
+                                                   data?.origen == 2 ? 'Común' :
+                                                   data?.origen == 3 ? 'Accidente' :
+                                                   data?.origen == 4 ? 'licencia de paternidad' : 
+                                                   data?.origen == 5 ? 'licencia de maternidad' :
+                                                   data?.origen == 6 ? 'Calamidad Doméstica' :
+                                                   ''
+                                                 }}
+                                                </th>
+                                                <td style="text-align: center;">
+                                                    {{data?.tipo == 1 ? 'inicial' : 'prorroga'}}</td>
+                                                <td style="text-align: center;">{{data?.inicio}}</td>
+                                                <td style="text-align: center;">{{data?.fin}}</td>
+                                                <td style="text-align: center;">{{data?.dias}}</td>
+                                                <td style="text-align: center;">{{data?.dias_acumulado}}</td>
+
+                                                <td style="text-align: center;">
+                                                    <button (click)="openStatusEmpleadoModal(data)" mat-flat-button
+                                                        class="border-button" fxLayout="column"
+                                                        fxLayoutAlign="center start" [ngStyle]="
+                                                                     {'background-color': data.status === 1? 'orange' : data.status === 2?
+                                                                     '#550070' : data.status === 3? 'blue' : data.status === 4?
+                                                                     'grey' :
+                                                                     data.status ===
+                                                                         5? 'red' :'green'}">
+                                                        <span style="color:white" class="tag"> {{
+                                                          data?.status == 1 ? 'rehabilitación ' :
+                                                          data?.status == 2 ? 'calificación' :
+                                                          data?.status == 3 ? 'determinación de origen' :
+                                                          data?.status == 4 ? 'pensionado' :
+                                                          data?.status == 5 ? 'reubicado' :
+                                                          data?.status == 6 ? 'finalizado' :
+                                                          ''
+                                                        }}</span>
+                                                    </button>
+                                                    <!-- <button (click)="openStatusEmpleadoModal(data)" class="btn btn-info">
+                                                     {{
+                                                          data?.status == 1 ? 'rehabilitación ' :
+                                                          data?.status == 2 ? 'calificación' :
+                                                          data?.status == 3 ? 'determinación de origen' :
+                                                          data?.status == 4 ? 'pensionado' :
+                                                          data?.status == 5 ? 'reubicado' :
+                                                          data?.status == 6 ? 'finalizado' :
+                                                          ''
+                                                        }}
+                                                 </button> -->
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Documentos">
+                                <div class="cont-card info-laboral ">
+                                    <div class="w-full max-w-screen-xl mx-auto">
+
+                                        <h3 class="text-lg font-medium tracking-tight leading-6 truncate">General</h3>
+                                        <fuse-alert [appearance]="'border'" [type]="'info'">
+                                            <div
+                                                class="text-1xl md:text-1xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                                                Infomación</div>
+                                            <div class="ml-1.5 leading-6 truncate text-secondary">
+                                                Requeridos: Cedula, Copia Contrato Laboral, Examen Medico de Ingreso,
+                                                Hoja
+                                                de Vida.
+                                            </div>
+                                        </fuse-alert>
+
+                                        <div class="cont-d-a" style="flex-grow: 1;">
+                                            <div class="cont-table">
+                                                <div fxLayout="row">
+                                                    <ng-container>
+                                                        <a (click)="openDocumentosModal('Cedula')"
+                                                            class="flex flex-col w-40 h-40 m-2 p-4 shadow rounded-2xl cursor-pointer bg-card">
+
+
+                                                            <div class="aspect-w-9 aspect-h-6">
+                                                                <div class="flex items-center justify-center">
+                                                                    <!-- Icons -->
+                                                                    <div class="relative">
+                                                                        <mat-icon class="icon-size-14 text-hint"
+                                                                            [svgIcon]="'iconsmind:file'"></mat-icon>
+                                                                        <div class="absolute left-0 bottom-0 px-1.5 rounded text-sm font-semibold leading-5 text-white"
+                                                                            [class.bg-red-600]=" 'PDF'"
+                                                                            [class.bg-blue-600]=" 'DOC'"
+                                                                            [class.bg-green-600]=" 'XLS'"
+                                                                            [class.bg-gray-600]=" 'TXT'"
+                                                                            [class.bg-amber-600]=" 'JPG'">
+                                                                            JPG
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div
+                                                                class="flex flex-col flex-auto justify-center text-center text-sm font-medium">
+                                                                <div class="truncate">Cedula</div>
+                                                                <ng-container>
+                                                                    <div class="text-secondary truncate">Documento</div>
+                                                                </ng-container>
+                                                            </div>
+                                                        </a>
+                                                    </ng-container>
+                                                    <ng-container>
+                                                        <a (click)="openDocumentosModal('Contrato Laboral')"
+                                                            class="flex flex-col w-40 h-40 m-2 p-4 shadow rounded-2xl cursor-pointer bg-card">
+
+
+                                                            <div class="aspect-w-9 aspect-h-6">
+                                                                <div class="flex items-center justify-center">
+                                                                    <!-- Icons -->
+                                                                    <div class="relative">
+                                                                        <mat-icon class="icon-size-14 text-hint"
+                                                                            [svgIcon]="'iconsmind:file'"></mat-icon>
+                                                                        <div class="absolute left-0 bottom-0 px-1.5 rounded text-sm font-semibold leading-5 text-white"
+                                                                            [class.bg-red-600]=" 'PDF'"
+                                                                            [class.bg-blue-600]=" 'DOC'"
+                                                                            [class.bg-green-600]=" 'XLS'"
+                                                                            [class.bg-gray-600]=" 'TXT'"
+                                                                            [class.bg-amber-600]=" 'JPG'">
+                                                                            PDF
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div
+                                                                class="flex flex-col flex-auto justify-center text-center text-sm font-medium">
+                                                                <div class="truncate"> Copia Contrato Laboral</div>
+                                                                <ng-container>
+                                                                    <div class="text-secondary truncate">Documento</div>
+                                                                </ng-container>
+                                                            </div>
+                                                        </a>
+                                                    </ng-container>
+                                                    <ng-container>
+                                                        <a (click)="openDocumentosModal('Examen Medico')"
+                                                            class="flex flex-col w-40 h-40 m-2 p-4 shadow rounded-2xl cursor-pointer bg-card">
+
+
+                                                            <div class="aspect-w-9 aspect-h-6">
+                                                                <div class="flex items-center justify-center">
+                                                                    <!-- Icons -->
+                                                                    <div class="relative">
+                                                                        <mat-icon class="icon-size-14 text-hint"
+                                                                            [svgIcon]="'iconsmind:file'"></mat-icon>
+                                                                        <div class="absolute left-0 bottom-0 px-1.5 rounded text-sm font-semibold leading-5 text-white"
+                                                                            [class.bg-red-600]=" 'PDF'"
+                                                                            [class.bg-blue-600]=" 'DOC'"
+                                                                            [class.bg-green-600]=" 'XLS'"
+                                                                            [class.bg-gray-600]=" 'TXT'"
+                                                                            [class.bg-amber-600]=" 'JPG'">
+                                                                            PDF
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div
+                                                                class="flex flex-col flex-auto justify-center text-center text-sm font-medium">
+                                                                <div class="truncate">Examén Médico</div>
+                                                                <ng-container>
+                                                                    <div class="text-secondary truncate">Documento</div>
+                                                                </ng-container>
+                                                            </div>
+                                                        </a>
+                                                    </ng-container>
+                                                    <ng-container>
+                                                        <a (click)="openDocumentosModal('Hoja de Vida')"
+                                                            class="flex flex-col w-40 h-40 m-2 p-4 shadow rounded-2xl cursor-pointer bg-card">
+
+
+                                                            <div class="aspect-w-9 aspect-h-6">
+                                                                <div class="flex items-center justify-center">
+                                                                    <!-- Icons -->
+                                                                    <div class="relative">
+                                                                        <mat-icon class="icon-size-14 text-hint"
+                                                                            [svgIcon]="'iconsmind:file'"></mat-icon>
+                                                                        <div class="absolute left-0 bottom-0 px-1.5 rounded text-sm font-semibold leading-5 text-white"
+                                                                            [class.bg-red-600]=" 'PDF'"
+                                                                            [class.bg-blue-600]=" 'DOC'"
+                                                                            [class.bg-green-600]=" 'XLS'"
+                                                                            [class.bg-gray-600]=" 'TXT'"
+                                                                            [class.bg-amber-600]=" 'JPG'">
+                                                                            PDF
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div
+                                                                class="flex flex-col flex-auto justify-center text-center text-sm font-medium">
+                                                                <div class="truncate">Hoja de Vida</div>
+                                                                <ng-container>
+                                                                    <div class="text-secondary truncate">Documento</div>
+                                                                </ng-container>
+                                                            </div>
+                                                        </a>
+                                                    </ng-container>
+                                                </div>
+                                                <!-- <button>
+                                                    <mat-icon 
+                                                        style="font-size: -webkit-xxx-large; margin: 20px;padding: 2px;">
+                                                        file_upload
+                                                    </mat-icon>
+                                                </button> -->
+
+                                                <table mat-table [dataSource]="imagen" class="table-100">
+
+                                                    <ng-container matColumnDef="nombre_documento">
+                                                        <th mat-header-cell *matHeaderCellDef class="txt-left">
+                                                            <strong>Nombre
+                                                                documento</strong> </th>
+                                                        <td mat-cell *matCellDef="let element" class="txt-left">
+                                                            {{element.description}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="fecha_guardado">
+                                                        <th mat-header-cell *matHeaderCellDef class="enc-tabla">
+                                                            <strong>Fecha de
+                                                                guardado</strong> </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{element.created_at | date:"yyyy-MM-dd"}}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- <ng-container matColumnDef="imagen">
+                                                     <th mat-header-cell *matHeaderCellDef class="enc-tabla">
+                                                         <strong>Documento</strong>
+                                                     </th>
+                                                     <td mat-cell *matCellDef="let element">
+             
+                                                         <img download
+                                                             [src]="element.type == 1 ? element.url : 'assets/img/logo-pdf.png'"
+                                                             alt="Documento" class="w-150 selectable"> </td>
+                                                 </ng-container> -->
+
+                                                    <ng-container matColumnDef="acciones">
+                                                        <th mat-header-cell *matHeaderCellDef class="enc-tabla">
+                                                            <strong>Acciones</strong>
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <a target="_blank" href="{{element.url}}">
+                                                                <mat-icon>visibility</mat-icon>
+                                                            </a>
+                                                            <!-- <button (click)="openMultimediaModal(element)"  mat-flat-button[color]="'primary'">
+                                                        <mat-icon [icIcon]="eye"></mat-icon>
+                                                      </button> -->
+
+                                                            <button mat-icon-button aria-label=""
+                                                                (click)="deleteMultimedia(element)">
+                                                                <mat-icon>delete</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <tr mat-header-row *matHeaderRowDef="displayedColumnsDocuments">
+                                                    </tr>
+                                                    <tr mat-row
+                                                        *matRowDef="let row; columns: displayedColumnsDocuments;"></tr>
+                                                </table>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-tab>
+
+
+                            <mat-tab label="Acumulativo Ult. Mes">
+                                <div class="w-full pr-70 pl-70  md:pr-50 pl-70 max-w-screen-xl mx-auto">
+                                    <table class="table">
+                                        <thead style="text-align: justify;">
+                                            <tr style="text-align: justify;">
+                                                <th scope="col">Concepto</th>
+                                                <th style="text-align: end;" scope="col">Valor</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody style="text-align: justify;">
+                                            <!-- <tr>
+                                           <th>IBC</th>
+                                           <td style="text-align: end;">{{currentRecord?.nominaDetalle?.ibc | currency}}</td>
+             
+                                       </tr> -->
+                                            <tr style="text-align: justify;">
+                                                <th>Salario Base</th>
+                                                <td style="text-align: end;">
+                                                    {{currentRecord?.salario_base | currency}}</td>
+
+                                            </tr>
+                                            <tr style="text-align: justify;">
+                                                <th>Aux. Transporte</th>
+                                                <td style="text-align: end;">
+                                                    {{currentRecord?.subsidio_transporte | currency}}</td>
+
+                                            </tr>
+                                            <tr style="text-align: justify;">
+                                                <th>Horas Extras</th>
+                                                <td style="text-align: end;">
+                                                    {{currentRecord?.nominaDetalle?.horas_extras  == null ? 0 : currentRecord?.nominaDetalle?.horas_extras | currency}}
+                                                </td>
+
+                                            </tr>
+                                            <tr style="text-align: justify;">
+                                                <th>Pagos Salariales</th>
+                                                <td style="text-align: end;">
+                                                    {{currentRecord?.nominaDetalle?.otros_ingresos | currency}}</td>
+
+                                            </tr>
+
+                                            <tr style="text-align: justify;">
+                                                <th>Pagos No Salariales</th>
+                                                <td style="text-align: end;">
+                                                    {{currentRecord?.nominaDetalle?.ingreso_noc | currency}}</td>
+
+                                            </tr>
+                                            <tr style="text-align: justify;">
+                                                <th>Deducible Salud</th>
+                                                <td style="text-align: end;">
+                                                    {{currentRecord?.nominaDetalle?.salud | currency}}</td>
+
+                                            </tr>
+                                            <tr style="text-align: justify;">
+                                                <th>Deducible Pension</th>
+                                                <td style="text-align: end;">
+                                                    {{ currentRecord?.nominaDetalle?.salud | currency}}
+                                                </td>
+
+                                            </tr>
+                                            <tr style="text-align: justify;">
+                                                <th>Total Liquidacion</th>
+                                                <td style="text-align: end;">
+                                                    {{currentRecord?.nominaDetalle?.totalNomina | currency}}
+                                                </td>
+
+                                            </tr>
+                                            <!-- 
+                                            <tr>
+                                                <th>Otros Ingresos</th>
+                                                <td style="text-align: end;">{{totalOtros | currency}}</td>
+             
+                                            </tr>
+                                             <tr>
+                                                <th>Horas Extras</th>
+                                                <td style="text-align: end;">{{horasExtrasTotal | currency}}</td>
+             
+                                            </tr> -->
+                                        </tbody>
+                                    </table>
+
+
+
+
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Acumulativo Pago">
+                                <div class="w-full pr-70 pl-70  md:pr-50 pl-70 max-w-screen-xl mx-auto">
+
+                                    <div class="cont-table">
+                                        <table class="table">
+                                            <thead style="text-align: justify;">
+                                                <tr>
+                                                    <th scope="col">Concepto</th>
+                                                    <th style="text-align: end;" scope="col">Valor</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody style="text-align: justify;">
+                                                <tr>
+                                                    <th>IBC total</th>
+                                                    <td style="text-align: end;">{{totalIbc | currency}}</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th>Promedio</th>
+                                                    <td style="text-align: end;">
+                                                        {{totalIbc * 30 / totalDias | currency}}
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th>Dias Acumulados</th>
+                                                    <td style="text-align: end;">{{totalDias}}</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th>Cesantias</th>
+                                                    <td style="text-align: end;">{{totalCesantias | currency}}</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th>Intereses</th>
+                                                    <td style="text-align: end;">{{totalIntereses | currency}}</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th>Prima de servicios</th>
+                                                    <td style="text-align: end;">{{ totalCesantias | currency}}</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th>Vacaciones</th>
+                                                    <td style="text-align: end;">{{totalVacaciones | currency}}</td>
+
+                                                </tr>
+                                                <!-- <tr>
+                                             <th>Retenciones y deducciones</th>
+                                             <td style="text-align: end;">{{totalDeducciones | currency}}</td>
+                                    
+                                         </tr> -->
+
+                                                <tr>
+                                                    <th>Totales</th>
+                                                    <td style="text-align: end;">
+                                                        {{ totalCesantias + totalIntereses + totalCesantias + totalVacaciones | currency}}
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th>Gran total (Cesantias, Intereses, Vacaciones, Prima, total
+                                                        ultimo
+                                                        mes)</th>
+                                                    <td style="text-align: end;">
+                                                        {{ currentRecord?.nominaDetalle?.totalNomina +  totalCesantias + totalIntereses + totalCesantias + totalVacaciones | currency}}
+                                                    </td>
+
+                                                </tr>
+                                                <!-- <tr>
+                                                 <th>Dias Valor</th>
+                                                 <td style="text-align: end;">{{totalDiasValor | currency}}</td>
+             
+                                             </tr>
+                                            <tr>
+                                                <th>Otros Ingresos</th>
+                                                <td style="text-align: end;">{{totalOtros | currency}}</td>
+             
+                                            </tr>
+                                             <tr>
+                                                <th>Horas Extras</th>
+                                                <td style="text-align: end;">{{horasExtrasTotal | currency}}</td>
+             
+                                            </tr> -->
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+
+                                    <div class="cont-btns">
+                                        <div *ngIf="currentRecord?.status == 1" fxLayoutAlign="end ">
+                                            <button style="margin: 10px;" (click)="Finalizar()" class="border-button"
+                                                mat-flat-button color="primary">
+                                                <mat-icon>work_history</mat-icon>
+                                                Liquidar Empleado
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+
+                    </div>
+                </form>
+
+            </section>
+        </div>
+    </div>
+</div>

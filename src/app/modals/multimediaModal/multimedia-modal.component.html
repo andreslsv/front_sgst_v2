@@ -1,0 +1,35 @@
+<div class="flex flex-col  max-h-screen -m-6">
+<div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+    <h2 class="text-lg font-medium" >Multimedia</h2>
+    <button (click)="close()" mat-icon-button [tabIndex]="-1">
+        <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+    </button>
+</div>
+
+  <div fxLayout="column" class="pl-10 pr-10">
+    <div fxLayout="column" fxLayoutAlign="start start">
+      <img *ngIf="multimedia && multimedia.type == 1" [src]="multimedia.url" alt="multimedia" class="w-150">
+      <!-- <img  src="./assets/images/video-prev.png" alt="multimedia" class="w-150"> -->
+      <!-- <video *ngIf="multimedia && multimedia.type == 2" controls #videoPlayer style="width:100%;">
+        <source src="{{multimedia.url}}" type="video/mp4" />
+        Browser not supported
+      </video> -->
+      <img *ngIf="multimedia && multimedia.type == 2" src="assets/img/logo-pdf.png" alt="multimedia" class="w-150">
+    </div>
+    <form fxLayout="column" fxFlex [formGroup]="obs" class="mt-12">    
+       <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+        <mat-label>Nombre del documento</mat-label>
+        <textarea matInput matAutosize matTextareaAutosize formControlName="description" cdkAutosizeMinRows="8"
+          required></textarea>
+      </mat-form-field>
+    </form>
+    <mat-dialog-actions align="end">
+      <!-- <button mat-button (click)="close()" [disabled]="sending">Cancelar</button> -->
+      <button mat-flat-button (click)="save()" [disabled]="sending || !obs.valid" color="primary">
+        <span *ngIf="!sending">Guardar</span>
+        <mat-spinner diameter="24" *ngIf="sending"></mat-spinner>
+      </button>
+    </mat-dialog-actions>
+    </div>
+  </div>
+

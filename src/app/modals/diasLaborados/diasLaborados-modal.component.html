@@ -1,0 +1,89 @@
+<div class="flex flex-col max-w-240 md:min-w-160 max-h-screen -m-6">
+       <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+           <div class="text-lg font-medium">Dias Laborados</div>
+           <button (click)="close()" mat-icon-button [tabIndex]="-1">
+               <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+           </button>
+       </div>
+    
+    <form class="p-10" fxLayout="column" [formGroup]="hto">
+      <table *ngIf="!edit" class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+           
+            <th scope="col"></th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th style="padding: 30px;" style="padding: 30px;" scope="row">¿Cuantos Dias ?  </th>
+        
+            <td>
+                   <!-- <mat-icon style="font-size: 40px; height: auto; width: auto; position: relative; top: 10px;margin-left: 15px;">
+              engineering
+            </mat-icon> -->
+             <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                <!-- <mat-label>Dias</mat-label> -->
+                <textarea matInput matAutosize matTextareaAutosize placeholder="Ingrese Los dias Laborados" formControlName="dias" value=""
+                  cdkAutosizeMinRows="1"></textarea>
+              </mat-form-field>
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+      <table *ngIf="edit" class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+
+            <th scope="col"></th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th style="padding: 30px;" style="padding: 30px;" scope="row">
+ 
+            ¿Cuantos Dias ? 
+            </th>
+         
+            <td style="text-align: center;padding: 30px;">{{Horas?.dias}}</td>
+            <td>
+                   <mat-icon style="font-size: 40px; height: auto; width: auto; position: relative; top: 10px;margin-left: 15px;">
+              engineering
+            </mat-icon>
+              <mat-form-field style="margin: 0px;" appearance="outline" class="blue bold-form mt-12"
+                floatLabel="always">
+                <mat-label></mat-label>
+                <textarea matInput matAutosize matTextareaAutosize formControlName="dias" value=""
+                  cdkAutosizeMinRows="3"></textarea>
+              </mat-form-field>
+            </td>
+
+          </tr>
+
+   
+        </tbody>
+      </table>
+
+      <div fxFlex></div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex></div>
+        <!-- <button mat-stroked-button class="ml-12" (click)="close()">Cerrar</button> -->
+        <button *ngIf="!edit" mat-flat-button color="primary" class="ml-12" (click)="save()"
+          [disabled]="sending || !hto.valid">
+          Guardar
+        </button>
+        <button *ngIf="edit" mat-flat-button color="primary" class="ml-12" (click)="saveEdit()"
+          [disabled]="sending || !hto.valid">
+          Actualizar
+        </button>
+      </div>
+    </form>
+
+
+</div>

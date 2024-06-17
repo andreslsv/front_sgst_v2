@@ -1,0 +1,163 @@
+<div class="flex flex-col max-w-240 md:min-w-160 max-h-screen -m-6">
+  <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+      <div class="text-lg font-medium">Extras y Recargos</div>
+      <button (click)="close()" mat-icon-button [tabIndex]="-1">
+          <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+      </button>
+  </div>
+
+    <form class="p-10" fxLayout="column" [formGroup]="hto">
+      <h4>Ingresa aqui el numero de horas extras o recargos</h4>
+      <br>
+               <table style="height: 400x;" *ngIf="!edit" class="table">
+                 <thead>
+                   <tr>
+                     <th scope="col"></th>
+                     <th scope="col">Valor sobre la hora ordinaria</th>
+                     <th scope="col">N° horas</th>
+   
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr>
+                     <th style="padding: 30px;" style="padding: 30px;" scope="row">Hora Extra Ordinaria</th>
+                     <td style="text-align: center;padding: 30px;">
+                       1,25
+                     </td>
+                     <td>
+                       <mat-form-field style="margin: 0px;" appearance="outline" class="blue bold-form mt-12"
+                         floatLabel="always">
+                         <mat-label></mat-label>
+                         <textarea matInput matAutosize matTextareaAutosize formControlName="tipo1" value=""
+                           cdkAutosizeMinRows="3"></textarea>
+                       </mat-form-field>
+                     </td>
+   
+                   </tr>
+                   <tr>
+                     <th style="padding: 30px;" scope="row">Hora Extra Nocturna</th>
+                     <td style="text-align: center;padding: 30px;">1,75</td>
+                     <td>
+                       <mat-form-field style="margin: 0px;" appearance="outline" class="blue bold-form mt-12"
+                         floatLabel="always">
+                         <mat-label></mat-label>
+                         <textarea matInput matAutosize matTextareaAutosize formControlName="tipo2" value=""
+                           cdkAutosizeMinRows="3"></textarea>
+                       </mat-form-field>
+                     </td>
+   
+                   </tr>
+                   <tr>
+                     <th style="padding: 30px;" scope="row">Hora Extra Dominical</th>
+                     <td style="text-align: center;padding: 30px;">2,0</td>
+                     <td>
+                       <mat-form-field style="margin: 0px;" appearance="outline" class="blue bold-form mt-12"
+                         floatLabel="always">
+                         <mat-label></mat-label>
+                         <textarea matInput matAutosize matTextareaAutosize formControlName="tipo3" value=""
+                           cdkAutosizeMinRows="3"></textarea>
+                       </mat-form-field>
+                     </td>
+   
+                   </tr>
+                   <tr>
+                     <th style="padding: 30px;" scope="row">Hora Extra Norturna Domiciliaria</th>
+                     <td style="text-align: center;padding: 30px;">2,5</td>
+                     <td>
+                       <mat-form-field style="margin: 0px;" appearance="outline" class="blue bold-form mt-12"
+                         floatLabel="always">
+                         <mat-label></mat-label>
+                         <textarea matInput matAutosize matTextareaAutosize formControlName="tipo4" value=""
+                           cdkAutosizeMinRows="3"></textarea>
+                       </mat-form-field>
+                     </td>
+   
+                   </tr>
+                 </tbody>
+               </table>
+         <table style="height: 400px;" *ngIf="edit" class="table">
+           <thead>
+             <tr>
+               <th scope="col"></th>
+               <th scope="col">Valor sobre la hora ordinaria</th>
+                <th scope="col">horas Seleccionadas</th>
+               <th scope="col">N° horas</th>
+   
+             </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <th style="padding: 30px;" style="padding: 30px;" scope="row">Hora Extra Ordinaria</th>
+               <td style="text-align: center;padding: 30px;">
+                 1,25
+               </td>
+               <td style="text-align: center;padding: 30px;">{{Horas?.tipo1}}</td>
+               <td>
+                 <mat-form-field style="margin: 0px;" appearance="outline"  class="blue bold-form mt-12"
+                   floatLabel="always">
+                   <mat-label></mat-label>
+                   <textarea matInput matAutosize matTextareaAutosize formControlName="tipo1" value=""
+                     cdkAutosizeMinRows="3"></textarea>
+                 </mat-form-field>
+               </td>
+         
+             </tr>
+             <tr>
+               <th style="padding: 30px;" scope="row">Hora Extra Nocturna</th>
+               <td style="text-align: center;padding: 30px;">1,75</td>
+               <td style="text-align: center;padding: 30px;">{{Horas?.tipo2}}</td>
+               <td>  <mat-form-field style="margin: 0px;" appearance="outline"  class="blue bold-form mt-12"
+                   floatLabel="always">
+                   <mat-label></mat-label>
+                   <textarea matInput matAutosize matTextareaAutosize formControlName="tipo2" value=""
+                     cdkAutosizeMinRows="3"></textarea>
+                 </mat-form-field></td>
+   
+             </tr>
+             <tr>
+               <th style="padding: 30px;" scope="row">Hora Extra Ordinaria Domiciliaria</th>
+               <td style="text-align: center;padding: 30px;">2,0</td>
+               <td style="text-align: center;padding: 30px;">{{Horas?.tipo3}}</td>
+               <td>  <mat-form-field style="margin: 0px;" appearance="outline"  class="blue bold-form mt-12"
+                   floatLabel="always">
+                   <mat-label></mat-label>
+                   <textarea matInput matAutosize matTextareaAutosize formControlName="tipo3" value=""
+                     cdkAutosizeMinRows="3"></textarea>
+                 </mat-form-field></td>
+   
+             </tr>
+             <tr>
+               <th style="padding: 30px;" scope="row">Hora Extra Norturna Domiciliaria</th>
+               <td style="text-align: center;padding: 30px;">2,5</td>
+               <td style="text-align: center;padding: 30px;">{{Horas?.tipo4}}</td>
+               <td>  <mat-form-field style="margin: 0px;" appearance="outline"  class="blue bold-form mt-12"
+                   floatLabel="always">
+                   <mat-label></mat-label>
+                   <textarea matInput matAutosize matTextareaAutosize formControlName="tipo4" value=""
+                     cdkAutosizeMinRows="3"></textarea>
+                 </mat-form-field></td>
+   
+             </tr>
+           </tbody>
+         </table>
+        
+        </form>
+        
+      <div fxFlex></div>
+        <div class="p-4" fxLayout="row" fxLayoutAlign="start center">
+          <div fxFlex></div>
+          <button mat-stroked-button class="ml-12 border-button" (click)="close()">Cerrar</button>
+          <button *ngIf="!edit" mat-flat-button color="primary" class="ml-12 border-button" (click)="save()"
+            [disabled]="sending || !hto.valid">
+            Guardar
+          </button>
+               <button *ngIf="edit" mat-flat-button color="primary" class="ml-12 border-button" (click)="saveEdit()"
+                 [disabled]="sending || !hto.valid">
+                 Actualizar
+               </button>
+        </div>
+         
+
+
+
+</div>

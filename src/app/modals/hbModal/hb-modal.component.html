@@ -1,0 +1,138 @@
+ <div class="flex flex-col max-w-240 md:min-w-160 max-h-screen -m-6">
+     
+  <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+          <div *ngIf="intereses ==false" class="text-lg font-medium">Otros Ingresos</div>
+          <div *ngIf="intereses ==true" class="text-lg font-medium">Intereses</div>
+          <button (click)="close()" mat-icon-button [tabIndex]="-1">
+              <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+          </button>
+      </div>
+      
+    
+    <form class="p-10" fxLayout="column" [formGroup]="hto">
+      <table *ngIf="!edit" class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+           
+            <th scope="col"></th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th style="padding: 30px;" style="padding: 30px;" scope="row"> Ingreso Constitutivo</th>
+        
+            <td>
+        
+              <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                <mat-label></mat-label>
+                 <input matInput type="number" formControlName="ingreso_c" class="example-right-align"
+                   placeholder="0">
+                 <span matPrefix>$&nbsp;</span>
+                 <span matSuffix>.00</span>
+              </mat-form-field>
+            </td>
+
+          </tr>
+          <!-- <tr>
+            <th style="padding: 30px;" scope="row">Ingreso No Constitutivo</th>
+  
+            <td>
+              <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                <mat-label></mat-label>
+                  <input matInput type="number" formControlName="ingreso_noc" class="example-right-align"
+                   placeholder="0">
+                 <span matPrefix>$&nbsp;</span>
+                 <span matSuffix>.00</span>
+              </mat-form-field>
+            </td>
+
+          </tr> -->
+        </tbody>
+      </table>
+      <table *ngIf="edit" class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Valor Ingresado</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th style="padding: 30px;" style="padding: 30px;" scope="row">
+                  <!-- <mat-form-field appearance="outline" class="mb-4 bold-form items-form" class="item">
+                    <mat-label>Descuentos</mat-label>
+                    <mat-select formControlName="ingreso_no" placeholder="..." #singleSelect>
+                      <mat-option value="Cuotas sindicales.">Cuotas sindicales.</mat-option>
+                      <mat-option value="Aportes a cooperativas.">Aportes a cooperativas.</mat-option>
+                      <mat-option value="Embargos judiciales.">Embargos judiciales.</mat-option>
+                      <mat-option value="Cuotas de créditos a entidades financieras.">Cuotas de créditos a entidades financieras.</mat-option>
+                      <mat-option value="Deudas del empleado con la empresa.">Deudas del empleado con la empresa.</mat-option>
+                      <mat-option value="Retención en la fuente.">Retención en la fuente.</mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+            <p *ngIf="intereses ==false">Ingreso Constitutivo</p>
+            <p *ngIf="intereses ==true">Ingrese el interes</p>
+            </th>
+         
+            <td style="text-align: center;padding: 30px;">{{items?.otros_ingresos | currency:'USD': 'symbol': '1.0-0'}}
+            </td>
+            <td>
+                 <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                   <!-- <mat-label></mat-label> -->
+                   <input matInput type="number" formControlName="ingreso_c" class="example-right-align"
+                     placeholder="0">
+                   <span matPrefix>$&nbsp;</span>
+                   <span matSuffix>.00</span>
+                 </mat-form-field>
+            </td>
+
+          </tr>
+          <!-- <tr>
+            <th style="padding: 30px;" scope="row">Ingreso No Constitutivo</th>
+          
+            <td style="text-align: center;padding: 30px;">{{Horas?.ingreso_noc | currency:'USD': 'symbol': '1.0-0'}}
+            </td>
+            <td>
+             <mat-form-field style="margin: 0px;" appearance="fill" floatLabel="always">
+               <mat-label></mat-label>
+               <input matInput type="number" formControlName="ingreso_noc" class="example-right-align" placeholder="0">
+               <span matPrefix>$&nbsp;</span>
+               <span matSuffix>.00</span>
+             </mat-form-field>
+            </td>
+
+          </tr> -->
+   
+        </tbody>
+      </table>
+
+      <div fxFlex></div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex></div>
+        <!-- <button mat-stroked-button class="ml-12" (click)="close()">Cerrar</button> -->
+        <button *ngIf="!edit" mat-flat-button color="primary" class="ml-12" (click)="save()"
+          [disabled]="sending || !hto.valid">
+          Guardar
+        </button>
+        
+        <span *ngIf="intereses ==false">
+           <button *ngIf="edit" mat-flat-button color="primary" class="ml-12" (click)="saveEdit()"
+             [disabled]="sending || !hto.valid">
+             Actualizar
+           </button>
+         </span>
+        
+        <span *ngIf="intereses ==true">
+          <button *ngIf="edit" mat-flat-button color="primary" class="ml-12" (click)="saveEditPersona()"
+            [disabled]="sending || !hto.valid">
+            Actualizar
+          </button>
+        </span>
+      </div>
+    </form>
+
+
+</div>

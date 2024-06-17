@@ -1,0 +1,87 @@
+<div class="flex flex-col max-w-240 md:min-w-160 max-h-screen -m-6">
+    <div fxLayout="column" class="cont-content-modal">
+        <!-- Header -->
+        <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+            <div class="text-lg font-medium">Agregar Sucursal</div>
+            <button (click)="close()" mat-icon-button [tabIndex]="-1">
+                <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+            </button>
+        </div>
+        <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto"
+           [formGroup]="sucursal">
+            <div fxLayout="column" fxFlex.gt-xs>
+                <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                  <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Nombre" formControlName="nombre" required />
+                </mat-form-field>
+                <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                    <mat-label>Departamento</mat-label>
+                    <mat-select formControlName="departamento" placeholder="Departamento" #singleSelect>
+                        <mat-option value="Amazonas">Amazonas</mat-option>
+                        <mat-option value="Antioquia">Antioquia</mat-option>
+                        <mat-option value="Arauca">Arauca</mat-option>
+                        <mat-option value="Atlántico">Atlántico</mat-option>
+                        <mat-option value="Bolívar">Bolívar</mat-option>
+                        <mat-option value="Boyacá">Boyacá</mat-option>
+                        <mat-option value="Caldas">Caldas</mat-option>
+                        <mat-option value="Caquetá">Caquetá</mat-option>
+                        <mat-option value="Casanare">Casanare</mat-option>
+                        <mat-option value="Cauca">Cauca</mat-option>
+                        <mat-option value="Cesar">Cesar</mat-option>
+                        <mat-option value="Chocó">Chocó</mat-option>
+                        <mat-option value="Córdoba">Córdoba</mat-option>
+                        <mat-option value="Cundinamarca">Cundinamarca</mat-option>
+                        <mat-option value="Guainía">Guainía</mat-option>
+                        <mat-option value="Guaviare">Guaviare</mat-option>
+                        <mat-option value="Huila">Huila</mat-option>
+                        <mat-option value="La Guajira">La Guajira</mat-option>
+                        <mat-option value="Magdalena">Magdalena</mat-option>
+                        <mat-option value="Meta">Meta</mat-option>
+                        <mat-option value="Nariño">Nariño</mat-option>
+                        <mat-option value="Norte de Santander">Norte de Santander</mat-option>
+                        <mat-option value="Putumayo">Putumayo</mat-option>
+                        <mat-option value="Quindío">Quindío</mat-option>
+                        <mat-option value="Risaralda">Risaralda</mat-option>
+                        <mat-option value="San Andrés y Providencia">San Andrés y Providencia</mat-option>
+                        <mat-option value="Santander">Santander</mat-option>
+                        <mat-option value="Sucre">Sucre</mat-option>
+                        <mat-option value="Tolima">Tolima</mat-option>
+                        <mat-option value="Valle del Cauca">Valle del Cauca</mat-option>
+                        <mat-option value="Vaupés">Vaupés</mat-option>
+                        <mat-option value="Vichada">Vichada</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="column" fxFlex.gt-xs>
+                     <mat-form-field class="flex-auto" style="flex-grow: 2; width:100%">
+    
+                       <mat-label>Caja C.F</mat-label>
+                       <mat-select formControlName="caja_cf" placeholder="Caja C.F" #singleSelect>
+                           <!-- <mat-option>
+               <ngx-mat-select-search [formControl]="procFilterCtrl"
+                 placeholderLabel="Buscar por código o palabra clave"
+                  noEntriesFoundLabel="'No se encontraron resultados'" [searching]="searchingProcedures">
+               </ngx-mat-select-search>
+             </mat-option> -->
+                           <mat-option *ngFor="let data of dataCaja" [value]="data.nombre">
+                               {{data.nombre}}
+                           </mat-option>
+                       </mat-select>
+                   </mat-form-field>
+                    <!-- <mat-form-field appearance="outline" fxFlex.gt-xs class="mb-1 bold-form" floatLabel="always" style="flex-grow: 2;">
+                        <mat-label>Ciudad</mat-label>
+                        <input matInput placeholder="..." formControlName="ciudad_sucursal" required />
+                    </mat-form-field> -->
+            </div>
+        </form>
+
+    </div>
+
+    <mat-dialog-actions align="end" class=" pr-6 sm:pr-8">
+        <button (click)="close()" mat-button class="border-button">Salir</button>
+    <button *ngIf="showOnlyName == false"  mat-flat-button class="border-button" color="primary"
+        (click)="save()">Crear</button>
+    <button *ngIf="showOnlyName == true"  mat-flat-button class="border-button" color="primary"
+        (click)="saveDetails()">Actualizar</button>
+    </mat-dialog-actions>
+</div>

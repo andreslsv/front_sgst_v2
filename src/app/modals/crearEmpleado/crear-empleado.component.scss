@@ -1,0 +1,58 @@
+h2{
+    margin-bottom: 20px;
+}
+h3{
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+.cont-a{
+    display: flex;
+    flex-direction: row;
+}
+.cont-a .item{
+    flex-grow: 1;
+    margin: 0px 5px;
+}
+
+.cont-a .item{
+    flex-grow: 1;
+    margin: 0px 5px;
+}
+
+.btn-cerrar{
+    background-color: #6E7277;
+    color: #fff;
+}
+
+.btn-guardar{
+    background-color:#04204A;
+    color: #fff;
+}
+
+table{
+    width: 100%;
+    box-shadow:none;
+}
+
+.btn-eye{
+    color:#7fcbc4;
+}
+
+.btn-subir{
+    background-color: #0699e1;
+    color: #fff;
+}
+
+.btn-delete{
+    color: #ef5350;
+}
+
+@media (max-width: 991.98px) {
+    .cont-a{
+        flex-direction: column;
+    }
+    .cont-a .item{
+        margin: 0px;
+    }
+}

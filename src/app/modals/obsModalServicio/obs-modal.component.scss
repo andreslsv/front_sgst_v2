@@ -1,0 +1,23 @@
+.cont-panel-agregar{
+    display: flex;
+    justify-content: center;
+}
+
+.cont-panel-agregar input{
+    margin: 0px 5px;
+}
+
+.input-agregar{
+    padding: 6px;
+    margin-top: 4px;
+    border-radius: 4px;
+    border: 1px solid #d6d6d6;
+    box-sizing: border-box;
+    display: block;
+    flex-grow: 1;
+}
+
+form{
+    width: 100%;
+    display: flex;
+}

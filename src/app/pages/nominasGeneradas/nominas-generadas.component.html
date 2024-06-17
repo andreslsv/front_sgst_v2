@@ -1,0 +1,151 @@
+<div class="flex-auto h-full  dark:bg-transparent">
+    
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Inicio</a>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                  Listado de Nominas
+                </h2>
+            </div>
+        </div>
+        <!-- Actions -->
+        <div (click)="openSelectPeriodo(id)" class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <a mat-flat-button target="_blank" rel="noreferrer"
+                [color]="'primary'">
+                <mat-icon>add_circle</mat-icon>
+                Liquidar Nueva Nomina
+            </a>
+        </div> 
+    </div>
+    <div class=" bg-card shadow rounded-2xl m-10">
+        <div class="p-10">
+            <section class="cont-pages" style="padding-top: 30px;">          
+                    <div class="cont-table ">
+                        <br>
+                         <div class="text-lg font-medium tracking-tight leading-6 truncate ml-8">Historial de nominas</div>
+
+                        <table mat-table [dataSource]="dataNomina" class="table-100">
+                            <ng-container matColumnDef="periodo">
+                            <th mat-header-cell *matHeaderCellDef> Periodo </th>
+                            <td mat-cell *matCellDef="let element"> {{element.nombre_periodo}} </td>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="empleados">
+                                <th mat-header-cell *matHeaderCellDef> N. empleados </th>
+                                <td mat-cell *matCellDef="let element"> {{element.numEmpleado }} </td>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="salarios">
+                                <th mat-header-cell *matHeaderCellDef> Salarios </th>
+                                <td mat-cell *matCellDef="let element"> {{element.salario_dias | currency}} </td>
+                            </ng-container>
+            
+            
+                            <!-- <ng-container matColumnDef="f_creacion">
+                                <th mat-header-cell *matHeaderCellDef> Horas Extras </th>
+                                <td mat-cell *matCellDef="let element"> {{element.t_valorHorasEx | currency}} </td>
+                            </ng-container> -->
+            
+                            <ng-container matColumnDef="pago_ss">
+                                <th mat-header-cell *matHeaderCellDef> Seg. Social </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <strong> {{element.t_valorSS | currency}}</strong> 
+                                </td>
+                            </ng-container>
+<!--             
+                            <ng-container matColumnDef="o_ingreso">
+                                <th mat-header-cell *matHeaderCellDef> Otros Pagos </th>
+                                <td mat-cell *matCellDef="let element"> {{element.t_otrosPagos | currency}} </td>
+                            </ng-container> -->
+            
+            
+                            <ng-container matColumnDef="deducciones">
+                                <th mat-header-cell *matHeaderCellDef> Deducciones </th>
+                                <td mat-cell *matCellDef="let element"> 
+                                    <strong>{{element.t_deducciones | currency}}</strong>
+                                    </td>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="total_pagar">
+                                <th mat-header-cell *matHeaderCellDef> Total </th>
+                                <td mat-cell *matCellDef="let element"> {{element.valorTotal | currency}} </td>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="status">
+                                <th mat-header-cell *matHeaderCellDef> Estado </th>
+                                <td mat-cell *matCellDef="let element"> 
+                                    
+                                    <div class="row">
+                                        <div style="border-radius: 10px;text-align: center; width:110px " fxLayout="column"
+                                            fxLayoutAlign="center start" [ngStyle]="{'background-color': element.status === 1 ? 'green' : element.status === 2 ?
+                                                        '#00b3e9' : element.status === 3 ? 'blue' : element.status === 4 ? 'green' : element.status ===
+                                                        5? 'red' :''}">
+                                            <span [ngStyle]="{'color': element.status == 1 ? 'white' : 'white'}"
+                                                style="width: 100%;padding:5px; font-weight: bold;">
+                                                {{element.status == 1 ? 'Generada' : 'En Proceso'}}
+                    
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </ng-container>
+            
+            
+                            <ng-container matColumnDef="acciones">
+                                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                                <td mat-cell *matCellDef="let element">
+            
+                                    <!-- <button (click)="openTirilla(element)" mat-icon-button class="color-naranja" type="button">
+                                        <mat-icon [icIcon]="file"></mat-icon>
+                                    </button> -->
+                            
+                                    <button title="Ver Presupuesto" *ngIf="element.status == 1" (click)="openPresupuesto(element)" mat-icon-button
+                                        type="button"
+                                        class="icon-verdeazul">
+                                        <mat-icon svgIcon="file_copy"></mat-icon>
+                                    </button>
+            
+                                        <button *ngIf="element.status == 3"  mat-icon-button
+                                            type="button" class="icon-negro">
+                                            <mat-icon svgIcon="file_copy"></mat-icon>
+                                        </button>
+                                                
+                                    <button title="Ver Detalle nomina" mat-icon-button (click)="selectDetails(element)" type="button" class="color-azul">
+                                        <mat-icon svgIcon="visibility"></mat-icon>
+                                    </button>
+                                    
+                                    <button title="Subir Documento de planilla" mat-icon-button type="button" class="color-azul">
+                                        <mat-icon (click)="openDocumento(element)">upload_file</mat-icon>
+                                    </button>
+                                    
+                                    <span *ngIf="eliminar()== 1">
+                                        <button title="Eliminar" *ngIf="element.status == 3" (click)="delete(element)" mat-icon-button class="icon-rojo"
+                                            type="button">
+                                           <mat-icon svgIcon="delete"></mat-icon>
+                                        </button>
+                                        <button title="Eliminar" *ngIf="element.status == 1" mat-icon-button class="icon-negro"
+                                            type="button">
+                                           <mat-icon svgIcon="delete"></mat-icon>
+                                        </button>
+                                    </span>
+            
+                                </td>
+                            </ng-container>
+                        
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+       
+            </section>
+        </div>
+    </div>
+
+</div>

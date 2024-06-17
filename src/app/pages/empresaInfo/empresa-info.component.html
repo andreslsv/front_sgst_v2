@@ -1,0 +1,664 @@
+<div class="flex-auto h-full  dark:bg-transparent">
+   <!-- Header -->
+   <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+       <div class="flex-1 min-w-0">
+           <!-- Breadcrumbs -->
+           <div class="flex flex-wrap items-center font-medium">
+               <div>
+                   <a class="whitespace-nowrap text-primary-500">Inicio</a>
+               </div>
+           </div>
+           <!-- Title -->
+           <div class="mt-2">
+               <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                   Empresa - {{currentRecord?.primer_nombre}}
+               </h2>
+           </div>
+       </div>
+       <!-- Actions -->
+       <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+           <a mat-flat-button href="https://material.angular.io/components/categories" target="_blank" rel="noreferrer"
+               [color]="'primary'">
+               <mat-icon class="icon-size-5 mr-2" class="icon-size-5 mr-2" [svgIcon]="'heroicons_solid:external-link'"></mat-icon>
+               Pre-Afiliar
+           </a>
+       </div> 
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <a mat-flat-button href="https://material.angular.io/components/categories" target="_blank" rel="noreferrer"
+                [color]="'primary'">
+                <!-- <mat-icon class="icon-size-5 mr-2" class="icon-size-5 mr-2" [svgIcon]="'heroicons_solid:external-link'"></mat-icon> -->
+                Activa
+            </a>
+        </div>
+
+   </div>
+
+    <div class=" bg-card shadow rounded-2xl m-10">
+         
+            <section class="cont-pages">
+            
+                <br>
+                <br>
+                <mat-horizontal-stepper labelPosition="bottom" #stepper>
+                    <mat-step>
+                        <ng-template matStepLabel>Datos de la empresa</ng-template>
+            
+                        <form>
+                        
+                            <div fxLayout="row" fxLayoutAlign="end" class="cont-btn-navegacion">
+                            <button (click)="save()" class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+                                <a mat-flat-button target="_blank"
+                                    rel="noreferrer" [color]="'primary'">
+                                        <mat-icon class="icon-size-5 mr-2">save</mat-icon>
+                                        Guardar
+                                </a>
+                            </button>
+                            
+                            <button mat-stroked-button matStepperNext style="background: aliceblue;"
+                                class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+                                Siguiente
+                                <mat-icon class="icon-size-5 ml-2" svgIcon="arrow_forward_ios"></mat-icon>
+                            </button>  
+                            
+                            </div>
+
+                            <br>
+                            <form [formGroup]="solicitud">
+                                <div class="cont-a">
+                                    <div class="cont-a-a">
+                                        <mat-form-field class="flex-auto" style="flex-grow: 3; width:100%">
+                                            <!-- <mat-label>Razón social</mat-label> -->
+                                            <input matInput type="text" placeholder="Razón social"
+                                                formControlName="razon_social" />
+                                        </mat-form-field>
+                                        <mat-form-field class="flex-auto" style="flex-grow: 2; width:100%">
+                                            <!-- <mat-label>Nombre Comercial</mat-label> -->
+                                            <input required matInput type="text" placeholder="Nombre Comercial"
+                                                formControlName="primer_nombre" />
+                                        </mat-form-field>
+                              
+                                       <mat-form-field class="flex-auto" style="flex-grow: 3; width:100%">
+                                            <!-- <mat-label>Tipo de empresa</mat-label> -->
+                                            <mat-select formControlName="tipoEmpresa" placeholder="Tipo de empresa"
+                                                #singleSelect>
+                                                <mat-option value="1">Natural</mat-option>
+                                                <mat-option value="2">Juridica</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    <mat-form-field class="flex-auto" style="flex-grow: 1; width:80%">        
+                                            <!-- <mat-label>Nit</mat-label> -->
+                                            <input matInput type="text" placeholder="Nit" formControlName="numDocumento" />
+                                        </mat-form-field>
+            
+                                        <mat-form-field class="flex-auto" style="flex-grow: 0; width:20%">
+                                            <!-- <mat-label>DIV</mat-label> -->
+                                            <input matInput type="text" placeholder="DIV" formControlName="dv" />
+                                        </mat-form-field>
+            
+            
+                                    </div>
+            
+                                    <div class="cont-a-b">
+                                       <mat-form-field class="flex-auto" style="flex-grow: 2; width:100%">
+                                            <!-- <mat-label>Dirección</mat-label> -->
+                                            <input matInput type="text" placeholder="Dirección " formControlName="direccion" />
+                                        </mat-form-field>
+            
+               
+            
+                                        <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                            <!-- <mat-label>Departamento</mat-label> -->
+                                            <mat-select placeholder="Departamento " formControlName="departamento"
+                                                #singleSelect
+                                                [(ngModel)]="tipoDepartamentoSeleccionado">
+                                                <mat-option *ngFor="let data of dataDepartamento;" [value]="data.nombre"
+                                                    >{{data.nombre}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+            
+                  
+                                        <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                            <!-- <mat-label>Ciudad</mat-label> -->
+                                            <input matInput type="text" placeholder="Ciudad " formControlName="ciudad" />
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="cont-a-c">
+                                       <mat-form-field class="flex-auto" style="flex-grow: 2; width:100%">
+                                            <!-- <mat-label>Email</mat-label> -->
+                                            <input matInput type="text" placeholder="Email " formControlName="email" />
+                                        </mat-form-field>
+            
+            
+                                        <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                            <!-- <mat-label>Teléfono móvil</mat-label> -->
+                                            <input matInput type="text" placeholder="eléfono móvil " formControlName="telEmpresaMovil" />
+                                        </mat-form-field>
+            
+                                        <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                            <!-- <mat-label>Teléfono fijo</mat-label> -->
+                                            <input matInput type="text" placeholder="Teléfono fijo " formControlName="telEmpresaFijo" />
+                                        </mat-form-field>
+            
+                                        <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                            <!-- <mat-label>tipo Empresa</mat-label> -->
+                                            <mat-select formControlName="tipoEmpresa" placeholder="Tipo Empresa " #singleSelect>
+                                                <mat-option value="1">Persona Natural</mat-option>
+                                                <mat-option value="2">Persona Juridica</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+            
+                                    <div class="cont-subtitulo-3">
+                                        <h3 class="text-lg font-medium tracking-tight leading-6 truncate">Datos del representante legal</h3>
+                                    </div>
+                                    <br>
+                                    <div class="cont-a-a">
+                                       <mat-form-field class="flex-auto" style="flex-grow: 2; width:100%">
+                                            <!-- <mat-label>Nombre representante</mat-label> -->
+                                            <input matInput type="text" placeholder="Nombre representante " formControlName="representanteLegal" />
+                                        </mat-form-field>
+            
+            
+                                        <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                            <!-- <mat-label>Email</mat-label> -->
+                                            <input matInput type="text" placeholder="Email " formControlName="email_responsable" />
+                                        </mat-form-field>
+            
+                                        <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                            <!-- <mat-label>Teléfono</mat-label> -->
+                                            <input matInput type="text" placeholder="Teléfono " formControlName="telefono_responsable" />
+                                        </mat-form-field>
+                                    </div>
+            
+                                    <div class="cont-a-b">
+                                       <mat-form-field class="flex-auto" style="flex-grow: 2; width:100%">
+                                            <!-- <mat-label>Nombre contacto</mat-label> -->
+                                            <input matInput type="text" placeholder="Nombre contacto " formControlName="contacto" />
+                                        </mat-form-field>
+            
+                                        <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                            <!-- <mat-label>Email contacto</mat-label> -->
+                                            <input matInput type="text" placeholder="Email contacto " formControlName="email_contacto" />
+                                        </mat-form-field>
+            
+                                        <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                            <!-- <mat-label>Teléfono contácto</mat-label> -->
+                                            <input matInput type="text" placeholder="Teléfono contácto " formControlName="telContacto" />
+                                        </mat-form-field>
+            
+                                    </div>
+
+                                    <div class="cont-subtitulo-3">
+                                        <h3 class="text-lg font-medium tracking-tight leading-6 truncate">Seguridad Social</h3>
+                                    </div>
+                                    <br>
+                                    <form [formGroup]="solicitud">
+                                        <div class="cont-a">
+                                            <div class="cont-a-a">
+            
+                                               <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                                    <!-- <mat-label>ARL</mat-label> -->
+                                                    <mat-select formControlName="arl" placeholder="ARL " #singleSelect>
+                                                        <mat-option value="Sura">Sura</mat-option>
+                                                        <mat-option value="Alfa S.A.">Alfa S.A.</mat-option>
+                                                        <mat-option value="Aurora S.A">Aurora S.A</mat-option>
+                                                        <mat-option value="Axa Colpatria.">Axa Colpatria.</mat-option>
+                                                        <mat-option value="Bolívar">Bolívar</mat-option>
+                                                        <mat-option value="Colmena.">Colmena.</mat-option>
+                                                        <mat-option value="La Equidad">La Equidad</mat-option>
+                                                        <mat-option value="Liberty.">Liberty.</mat-option>
+                                                        <mat-option value="Mapfre">Mapfre</mat-option>
+                                                        <mat-option value="Positiva">Positiva</mat-option>
+                                                        <mat-option value="No tiene.">No tiene.</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+            
+                                               <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                                    <!-- <mat-label>RIESGO</mat-label> -->
+                                                    <mat-select formControlName="riesgo" placeholder="RIESGO " #singleSelect>
+                                                        <mat-option value="1">1</mat-option>
+                                                        <mat-option value="2">2</mat-option>
+                                                        <mat-option value="3">3</mat-option>
+                                                        <mat-option value="4">4</mat-option>
+                                                        <mat-option value="5">5</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                               <mat-form-field class="flex-auto" style="flex-grow: 2; width:100%">
+                                                    <!-- <mat-label>Caja C.F</mat-label> -->
+                                                    <mat-select formControlName="caja_cf" placeholder="Caja C.F " #singleSelect>
+                                                        <!-- <mat-option>
+                                    <ngx-mat-select-search [formControl]="dataprocFilterCtrl"
+                                        placeholderLabel="Buscar por código o palabra clave"
+                                        noEntriesFoundLabel="'No se encontraron resultados'" [searching]="searchingProcedures">
+                                    </ngx-mat-select-search>
+                                    </mat-option> -->
+                                                        <mat-option *ngFor="let data of dataCaja" [value]="data.nombre">
+                                                            {{data.nombre}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                               <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                                    <!-- <mat-label>
+                                                        Los trabajadores son exonerado de pago en aporte parafiscales y salud
+                                                    </mat-label> -->
+                                                    <mat-select formControlName="categoria" placeholder="Los trabajadores son exonerado de pago en aporte parafiscales y salud " #singleSelect>
+                                                        <mat-option value="1">Si</mat-option>
+                                                        <mat-option value="2">No</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </form>
+            
+                            <div fxLayout="row">
+
+                                <div class="cont-a-d">
+                                    <div>
+                                        <button (click)="openagregarSucursalModal()" class="fuse-mat-button-rounded"
+                                            mat-flat-button [color]="'primary'">
+                                            <mat-icon class="icon-size-5 mr-2">add_circle_outline</mat-icon>
+                                            <span>Agregar sucursal</span>
+
+                                        </button>
+                                    </div>
+                                    <ul *ngFor="let item of dataSucursal">
+                                        <li> {{ item?.nombre}} | {{ item?.caja_cf }}</li>
+
+                                        <li>
+                                            <span>
+                                                <mat-icon (click)="openEditarSucursalModal(item)"
+                                                    svgIcon="remove_red_eye"></mat-icon>
+                                                <mat-icon (click)="deleteSucursal(item)" svgIcon="delete"></mat-icon>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <button (click)="openDocumentosModalIcon()" style="height: 50px;" mat-flat-button
+                                    class="border-button" color="primary">
+                                    <mat-icon class="icon-size-5 mr-2">
+                                        add_a_photo
+                                    </mat-icon>
+                                    Subir Logo
+                                </button>
+                                <div *ngFor="let item of dataEmpresa">
+                                    <mat-icon *ngIf="item.imagen != null"  class="icon-size-5 mr-2" height="30" style="color: green;margin: 10px;"
+                                        svgIcon="check_circle_outline"></mat-icon>
+                                    <mat-icon *ngIf="item.imagen == null" class="icon-size-5 mr-2" height="30" style="color: red;margin: 10px;"
+                                        svgIcon="mat_outline:remove_circle"></mat-icon>
+                                </div>
+
+                                <!-- <img style="height: 100px;margin-left: 30px;"
+                                    src="{{currentRecord?.imagen != null ? currentRecord?.imagen : 'assets/img/noimage.png'}}" /> -->
+                            </div>
+                        </form>
+            
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup">
+                        <div fxLayout="row" fxLayoutAlign="end">
+                            <button mat-stroked-button matStepperNext style="background: aliceblue;"
+                                class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+                                Siguiente
+                                <mat-icon class="icon-size-5 ml-2" svgIcon="arrow_forward_ios"></mat-icon>
+                            </button>  
+
+                        </div>
+                        <form>
+                            <ng-template matStepLabel>Servicios Contratados</ng-template>
+                            <div>
+                                <br>
+                                <fuse-alert [appearance]="'border'" [type]="'info'">
+                                <div class="text-1xl md:text-1xl font-semibold tracking-tight leading-7 md:leading-snug truncate">Resumen de Servicios Contratados</div>
+                                 <div class="ml-1.5 leading-6 truncate text-secondary">
+                                    si necesita agregar o eliminar un servicio por favor realizar una solicitud en el
+                                    menu de la izquierda.
+                                 </div>
+                                </fuse-alert>
+
+                                <div class="cont-table" style="margin-bottom:50px; margin-top: 50px;">
+                                    <table mat-table [dataSource]="detalleServicio" class="table-100">
+                                        <ng-container matColumnDef="nombre_empleado">
+                                            <th mat-header-cell *matHeaderCellDef class="txt-left"> SERVICIO </th>
+                                            <td mat-cell *matCellDef="let element" class="txt-left">
+                                                {{ element.nombre}}
+                                            </td>
+                                        </ng-container>
+            
+                                        <ng-container matColumnDef="paquete">
+                                            <th mat-header-cell *matHeaderCellDef class="enc-tabla"> PAQUETE </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                {{ element.valor == 1 ? ' No aplica' : element.paquete}}
+                                            </td>>
+                                        </ng-container>
+            
+                                        <ng-container matColumnDef="documento_empleado">
+                                            <th mat-header-cell *matHeaderCellDef class="enc-tabla"> UNIDAD </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                {{ element.valor == 1 ? ' No aplica' : element.unidad == 2 ? ' Servicio' : element.unidad == 1 ? ' Persona' : ''}}
+                                            </td>>
+                                        </ng-container>
+            
+                                        <ng-container matColumnDef="afiliacion">
+                                            <th mat-header-cell *matHeaderCellDef class="enc-tabla"> PRECIO UNITARIO </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                {{element.valor == 1 ? ' No aplica' : element.valor | currency}}
+                                            </td>
+                                        </ng-container>
+            
+                                        <ng-container matColumnDef="contrato">
+                                            <th mat-header-cell *matHeaderCellDef class="enc-tabla"> CANTIDAD </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                {{element.valor == 1 ? ' No aplica' : element.cantidad}}
+                                            </td>
+            
+                                        </ng-container>
+            
+                                        <ng-container matColumnDef="total">
+                                            <th mat-header-cell *matHeaderCellDef>TOTAL </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                {{element.valor == 1 ? 0 : element.valor  * element.cantidad | currency}}
+                                            </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="status">
+                                            <th mat-header-cell *matHeaderCellDef>ESTADO </th>
+                                            <td mat-cell *matCellDef="let element" fxLayout="row">
+                                                <div class="container" style="border-radius: 30px;text-align: center; width:200px "
+                                                    fxLayout="column" fxLayoutAlign="center" [ngStyle]="{
+                                                    'background-color': element?.status === 1 ? '#00b3e9' : element?.status === 2 ?
+                                                    'orange' : element?.status === 3 ? 'blue' : element?.status === 4 ? 'green' : 
+                                                    element?.status === null? 'red' : element?.status === 5? 'grey' :''
+                                                    }">
+                                                    <p style="width: 100%;padding:5px; font-weight: bold;color: white;">
+                                                        {{
+                                                                element?.status == 1 ? 'En proceso' :
+                                                                element?.status == 2 ? 'Finalizado' : element?.status == 3 ?
+                                                                'Recurente' : element?.status == 4 ? 'Cancelado' : 'No aplica'
+                                                                }}
+                                                    </p>
+                                                </div>
+            
+                                                <!-- <button >
+                                                    <mat-icon class="icon-size-5 mr-2" >delete</mat-icon>
+                                                </button> -->
+                                            </td>
+                                        </ng-container>
+            
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+                                    </table>
+                                </div>
+                                <!-- <div class="cont-table">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" *ngFor="let data of detalleServicio" scope="col">
+                                                    {{data.nombre}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td *ngFor="let data of detalleServicio">
+                                                    <div class="container"
+                                                        style="border-radius: 10px;text-align: center; width:200px "
+                                                        fxLayout="column" (click)="openModal(data)" fxLayoutAlign="center"
+                                                        [ngStyle]="{
+                                                    'background-color': data?.status === 1 ? '#00b3e9' : data?.status === 2 ?
+                                                    'orange' : data?.status === 3 ? 'blue' : data?.status === 4 ? 'green' : 
+                                                    data?.status === null? 'red' : data?.status === 5? 'grey' :''
+                                                    }">
+                                                        <p style="width: 100%;padding:5px; font-weight: bold;color: white;">
+                                                            {{
+                                                                data?.status == 1 ? 'Pendiente' :
+                                                                data?.status == 2 ? 'Finalizado' : data?.status == 3 ?
+                                                                'Recurente' : data?.status == 4 ? 'Cancelado' : 'No aplica'
+                                                                }}
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div> -->
+            
+                            </div>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="threeFormGroup">
+                        <form>
+                            <ng-template matStepLabel>Empleados</ng-template>
+                            
+                            <div fxLayout="row" fxLayoutAlign="end">
+                                <button mat-stroked-button (click)="stepper.reset()" style="background: aliceblue;"
+                                class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+                                <mat-icon class="icon-size-5 mr-2" svgIcon="arrow_back_ios"></mat-icon>
+                                      Regresar
+                                </button>
+                            </div>
+                            <br>
+                            <div>
+                                  <fuse-alert [appearance]="'border'" [type]="'info'">
+                                      <div class="text-1xl md:text-1xl font-semibold tracking-tight leading-7 md:leading-snug truncate">
+                                          N° Empleados</div> 
+                                          <span class="title-tag">
+                                              ( {{total2}} activos)
+                                              <span class="title-tag" style="color:red">({{total1}}
+                                                  desvinculados)</span>
+                                          </span>
+                                  </fuse-alert>
+
+                                <br>
+                                <br>
+                                <div style="" class="p-4 cont-filtro">
+                                    <input placeholder="Buscar" class="input-buscar" type="text">
+                                    <select name="doctor" id="selectDoctor" class="select-filtro">
+                                        <option selected>ESTADO</option>
+                                        <option value="1">Activo</option>
+                                        <option value="2">Inactivo</option>
+                                    </select>
+                                </div>
+            
+                                <div class="cont-table">
+                                    <table mat-table [dataSource]="data" class="table-100">
+                                        <ng-container matColumnDef="nombre">
+                                            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                {{element.primer_nombre}} {{element.primer_apellido}}
+                                            </td>
+                                        </ng-container>
+            
+                                        <ng-container matColumnDef="documento">
+                                            <th mat-header-cell *matHeaderCellDef> Documento </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.numero_documento}} </td>
+                                        </ng-container>
+            
+                                        <ng-container matColumnDef="tel_contacto">
+                                            <th mat-header-cell *matHeaderCellDef> Fecha de terminación </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.fecha_retiro | date:'dd/MM/yyyy'}}
+                                            </td>
+                                        </ng-container>
+            
+                                        <ng-container matColumnDef="f_ingreso">
+                                            <th mat-header-cell *matHeaderCellDef> Fecha de ingreso </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.fecha_ingreso | date:'dd/MM/yyyy'}}
+                                            </td>
+                                        </ng-container>
+            
+                                        <ng-container matColumnDef="tipo_contrato">
+                                            <th mat-header-cell *matHeaderCellDef> Tipo de contrato </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                {{element.tipoContrato == 1 ? ' termino indefinido' : element.tipoContrato == 2? 'termino fijo' : element.tipoContrato == 3? 'obra o labor' : element.tipoContrato == 4? 'aprendiz' : element.tipoContrato == 5? 'tiempo parcial' : element.tipoContrato == 6? 'tiempo completo' : element.tipoContrato == 7? 'medio tiempo' : '' }}
+                                            </td>
+                                        </ng-container>
+            
+                                        <ng-container matColumnDef="salario">
+                                            <th mat-header-cell *matHeaderCellDef> Salario </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.salario_base | currency}} </td>
+                                        </ng-container>
+            
+                                        <ng-container matColumnDef="estado">
+                                            <th mat-header-cell *matHeaderCellDef class="enc-tabla">Estado</th>
+                                            <td mat-cell *matCellDef="let element">
+                                               
+                                                 <span class="flex items-center">
+                                                     <span class="w-2 h-2 rounded-full" [ngClass]="{'bg-blue-500': element.id === 1,
+                                                                    'bg-red-500': element.status === 3,
+                                                                    'bg-green-500': element.status === 1,
+                                                                    'bg-amber-500': element.status === 2,
+                                                                    'bg-indigo-500': element.status === 5}"></span>
+                                                     <span
+                                                         class="ml-3
+                                                         leading-4">{{element.status == 1 ? 'activo' : element.status == 2 ? 'inactivo' : element.status == 3 ? 'vacaciones' : element.status == 4 ? 'permiso' : element.status == 5 ?  'incapacidad' : element.status == 6 ? 'retirado' : 'En proceso' }}</span>
+                                                 </span>
+                                                </td>
+                                        </ng-container>
+            
+            
+                                        <ng-container matColumnDef="acciones">
+                                            <th mat-header-cell *matHeaderCellDef class="enc-tabla"> Acciones </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <button  mat-button class="color-azul">
+                                                    <mat-icon class="icon-size-5 mr-2" [icIcon]="chat"></mat-icon>
+                                                </button>
+                                                <button mat-button class="color-purpura">
+                                                    <mat-icon class="icon-size-5 mr-2" 
+                                                        [icIcon]="baselineOpenInNew">
+                                                    </mat-icon>
+                                                </button>
+                                                    <button  *ngIf="element.status == 1" mat-button
+                                                        class="color-black">
+                                                        <mat-icon class="icon-size-5 mr-2" >
+                                                            delete
+                                                        </mat-icon>
+                                                    </button>
+                                                <button *ngIf="element.status !== 1" mat-button color="primary">
+                                                    <mat-icon class="icon-size-5 mr-2"  >
+                                                        delete
+                                                    </mat-icon>
+                                                </button>
+                                            </td>
+                                        </ng-container>
+            
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                                    </table>
+                                </div>
+                            </div>
+            
+                        </form>
+                    </mat-step>
+            
+                    <!-- <mat-step>
+                        <ng-template matStepLabel> ÚLTIMAS NÓMINAS LIQUIDADAS</ng-template>
+                        <div >
+                            <div class="card-title-row">
+                                <h3>
+                                    ÚLTIMAS NÓMINAS LIQUIDADAS
+                                </h3>
+            
+                                <div>
+                                    <button class="btn-verde">
+                                        <span>NUEVA NÓMINA</span>
+                                        <mat-icon class="icon-size-5 mr-2" [icIcon]="plusCircle"></mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+            
+                            <div class="p-4 cont-filtro">
+                                <form fxLayout="row" fxFlex.gt-xs fxLayout.xs="column" fxLayoutAlign="start center"
+                                    fxLayoutAlign.sm="start start" fxItemAlign="center" fxItemAlign.xs="start" fxLayoutGap="24px"
+                                    fxLayoutGap.xs="12px" [formGroup]="filters">
+                                    <mat-form-field appearance="outline" fxFlexAlign.xs="stretch" style="flex-grow: 1"
+                                        class="mb-4 bold-form items-form" floatLabel="always">
+                                        <mat-label>Buscar</mat-label>
+                                        <input matInput (keyup)="searchKeyUp($event)" #search placeholder="Id o Nombre "
+                                            formControlName="search" />
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline" fxFlexAlign.xs="stretch" style="flex-grow: 1"
+                                        class="mb-4 bold-form items-form" floatLabel="always">
+                                    <mat-label>Fecha</mat-label>
+                                        <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Rango de fecha"
+                                            autocomplete="off" (dateChange)="dateChange($event)" />
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </form>
+                            </div>
+            
+                            <div class="cont-table">
+                                <table mat-table [dataSource]="dataNomina" class="table-100">
+                                    <ng-container matColumnDef="periodo">
+                                        <th mat-header-cell *matHeaderCellDef> Periodo </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            {{element.periodo == 1 ? 'Quincenal' : element.periodo == 2 ? 'Mensual' : element.periodo == 3 ? ' Semanal' : 'ninguno'}}
+                                        </td>
+                                    </ng-container>
+            
+                                    <ng-container matColumnDef="num_pago">
+                                        <th mat-header-cell *matHeaderCellDef> Número de pago </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                    </ng-container>
+            
+                                    <ng-container matColumnDef="f_pago">
+                                        <th mat-header-cell *matHeaderCellDef> Fecha de pago </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.nombre_periodo}} </td>
+                                    </ng-container>
+            
+                                    <ng-container matColumnDef="empleados">
+                                        <th mat-header-cell *matHeaderCellDef> Empleados </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.numEmpleado}} </td>
+                                    </ng-container>
+            
+                                    <ng-container matColumnDef="aportes">
+                                        <th mat-header-cell *matHeaderCellDef> Aportes </th>
+                                        <td mat-cell *matCellDef="let element"></td>
+                                    </ng-container>
+            
+                                    <ng-container matColumnDef="valor_total">
+                                        <th mat-header-cell *matHeaderCellDef> Valor total </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.valor_total}} </td>
+                                    </ng-container>
+            
+                                    <ng-container matColumnDef="estado">
+                                        <th mat-header-cell *matHeaderCellDef> Estado </th>
+                                        <td mat-cell *matCellDef="let element"> <span [ngClass]="getEstadoClass(element.estado)"
+                                                class="tag">{{element.estado}}</span> </td>
+                                    </ng-container>
+            
+                                    <ng-container matColumnDef="acciones">
+                                        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                                        <td mat-cell *matCellDef="let element">
+            
+                                            <button mat-icon-button type="button" class="color-naranja">
+                                                <mat-icon class="icon-size-5 mr-2" [icIcon]="file"></mat-icon>
+                                            </button>
+            
+                                            <button mat-icon-button type="button" class="color_morado">
+                                                <mat-icon class="icon-size-5 mr-2" [icIcon]="chat"></mat-icon>
+                                            </button>
+            
+                                            <button mat-icon-button type="button" [routerLink]="['../empresainfo']"
+                                                class="color-azul">
+                                                <mat-icon class="icon-size-5 mr-2" [icIcon]="baselineOpenInNew"></mat-icon>
+                                            </button>
+            
+                                            <button mat-icon-button type="button" class="icon-rojo">
+                                                <mat-icon class="icon-size-5 mr-2" [icIcon]="baselineDeleteForever"></mat-icon>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+            
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </mat-step> -->
+                </mat-horizontal-stepper>
+            
+            </section>
+        </div>
+    </div>
+
+

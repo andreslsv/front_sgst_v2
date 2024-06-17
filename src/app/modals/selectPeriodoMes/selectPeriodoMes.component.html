@@ -1,0 +1,31 @@
+ <div class="flex flex-col max-w-240 md:min-w-160 max-h-screen -m-6">
+     
+     <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+         <div class="text-lg font-medium">¿ Esta seguro que desea crear la nomina para el periodo ?</div>
+         <button (click)="close()" mat-icon-button [tabIndex]="-1">
+             <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+         </button>
+     </div>
+    <form class="p-10" [formGroup]="solicitud">
+        <div class="container">
+           <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                <mat-label>Periodo</mat-label>
+                <mat-select formControlName="nombre_periodo" placeholder="..." #singleSelect>
+                    <mat-option *ngFor="let data of dataCaja" [value]="data.rango">
+                        {{data.rango}}
+                    </mat-option>
+                   
+                </mat-select>
+            </mat-form-field>
+        </div>
+    
+    </form>
+    
+    <div fxLayout="row" fxLayoutAlign="end stretch" class="pr-10 pb-10" style="width: 100%;">
+        <!-- <button mat-stroked-button class="btn-cerrar" (click)="close()">Cerrar</button> -->
+        <button *ngIf="empresa == true" mat-flat-button color="primary"
+            (click)="save()">Guardar</button>
+        <button *ngIf="independiente == true" mat-flat-button color="primary"
+            (click)="savePersona()">Guardar</button>
+    </div>
+ </div>

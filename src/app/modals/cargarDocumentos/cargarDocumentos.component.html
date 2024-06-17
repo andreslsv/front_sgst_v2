@@ -1,0 +1,204 @@
+ <div class="flex flex-col  max-h-screen -m-6">
+     
+     <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+          <h2 class="text-lg font-medium" *ngIf="general == true">Cargar Documentos</h2>
+          <h2 class="text-lg font-medium" *ngIf="contrato == true">Cargar Documentos Contratos</h2>
+          <h2 class="text-lg font-medium" *ngIf="ss == true">Cargar Documentos Seguridad Social</h2>
+          <h2 class="text-lg font-medium" *ngIf="Planilla == true">Subir Documentos </h2>
+    
+         <button (click)="close()" mat-icon-button [tabIndex]="-1">
+             <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+         </button>
+     </div>
+    <form class="p-10" [formGroup]="solicitud">
+                <div class="cont-d-a" style="flex-grow: 1;">
+                    <div class="cont-table">
+                        <form [formGroup]="uploadForm">
+    
+                            <br />
+                            <input formControlName="document" type="file" ng2FileSelect class="file-select"
+                                [uploader]="uploader" multiple /><br /> 
+                            <br />
+                            <!-- <div style="height: 150px;background: #f2f2f2;" class="drop-zone">
+                                <div ng2FileDrop [uploader]="uploader" class="drop-zone arrastrar-documentos">
+                                    Arrastra y suelta los archivos aquí
+                                </div>
+                            </div> -->
+                            <br>
+                            <table style="margin-top: 20px;">
+                                <thead>
+                                    <tr>
+                                        <th width="20%">Nombre</th>
+                                        <th width="20%">Tamaño</th>
+                                        <!-- <th width="20%">Progreso</th> -->
+                                        <th width="20%">Estado</th>
+                                        <!-- <th width="20%">Acciones</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of uploader.queue">
+                                        <td class="text-center">
+                                            <strong>{{ item?.file?.name }}</strong>
+                                        </td>
+                                        <td class="text-center" nowrap>
+                                            {{ item?.file?.size / 1024 / 1024 | number: '.2' }} MB</td>
+                                        <!-- <td>
+                                            <div style="margin: 1px;" class="progress">
+                                                <div class="progress-bar" role="progressbar"
+                                                    [ngStyle]="{ 'width': item.progress + '%' }">
+                                                </div>
+                                            </div>
+                                        </td> -->
+                                        <td class="text-center">
+                                                <span *ngIf="item.isSuccess">
+                                                    <mat-icon svgIcon="check_circle_outline"></mat-icon>
+                                                </span>
+                                                <span *ngIf="item.isCancel">
+                                                    <mat-icon svgIcon="cancel"></mat-icon>
+                                                </span>
+                                                <span *ngIf="item.isError">
+                                                    <mat-icon svgIcon="remove_circle_outline"></mat-icon>
+                                                </span>
+                                        </td>
+                                        <!-- <td nowrap>
+                                            <button (click)="item.upload()"
+                                                [disabled]="item.isReady || item.isUploading || item.isSuccess"
+                                                class="flex-auto" mat-flat-button [color]="'primary'">
+                                                Guardar
+                                            </button>
+                                            <button class="flex-auto" (click)="item.remove()" mat-stroked-button>
+                                                Eliminar
+                                            </button>
+                                        </td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br />
+                            <div fxLayoutAlign="end ">
+                               <!-- <div class="container">
+                                   <p style="color: #838383;font-size: medium;">Progreso:</p>
+                                   <div class="progress">
+                                       <div class="progress-bar" role="progressbar"
+                                           [ngStyle]="{ 'width': uploader.progress + '%' }">
+                                       </div>
+                                   </div>
+                               </div> -->
+                               <button mat-flat-button [color]="'primary'"class="bg-green text-white border-button"
+                                   (click)="uploader.uploadAll()" (click)="getRecordPlanillaMultimedia()"
+                                   [disabled]="!uploader.getNotUploadedItems().length">
+                                   Guardar
+                               </button>
+    
+                               <!-- <button mat-flat-button [color]="'primary'"class="bg-red text-white ml-8 border-button"
+                                   (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                                   Cancelar
+                               </button> -->
+    
+                               <button mat-flat-button [color]="'primary'"class="bg-orange text-white ml-8 border-button"
+                                   (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                                   Remover
+                               </button>
+                            </div>
+                        </form>
+                      <!-- <table *ngIf="Planilla == false" mat-table [dataSource]="imagen" class="table-100">
+    
+                          <ng-container matColumnDef="nombre_documento">
+                              <th mat-header-cell *matHeaderCellDef class="txt-left"> <strong>Nombre
+                                      documento</strong> </th>
+                              <td mat-cell *matCellDef="let element" class="txt-left"> {{element.name}}
+                              </td>
+                          </ng-container>
+    
+                          <ng-container matColumnDef="descripcion">
+                              <th mat-header-cell *matHeaderCellDef class="txt-left">
+                                  <strong>Descripcion</strong>
+                              </th>
+                              <td mat-cell *matCellDef="let element" class="txt-left"> {{element.description}}
+                              </td>
+                          </ng-container>
+    
+                          <ng-container matColumnDef="fecha_guardado">
+                              <th mat-header-cell *matHeaderCellDef class="enc-tabla"> <strong>Fecha de
+                                      guardado</strong> </th>
+                              <td mat-cell *matCellDef="let element"> {{element.created_at | date:"yyyy-MM-dd"}}
+                              </td>
+                          </ng-container>
+    
+                          <ng-container matColumnDef="imagen">
+                              <th mat-header-cell *matHeaderCellDef class="enc-tabla"> <strong>Documento</strong>
+                              </th>
+                              <td mat-cell *matCellDef="let element">
+    
+                                  <img download [src]="element.type == 1 ? element.url : 'assets/img/logo-pdf.png'"
+                                      alt="Documento" style="width: 50px;" class=" selectable"> </td>
+                          </ng-container>
+
+    
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsDocuments"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsDocuments;"></tr>
+                      </table> -->
+                      <div style="height: 100px;">
+                            <table *ngIf="Planilla == true" mat-table [dataSource]="imagenPlanilla" class="table-100">
+        
+                                <ng-container matColumnDef="nombre_documento">
+                                    <th mat-header-cell *matHeaderCellDef class="txt-left"> <strong>Nombre
+                                            documento</strong> </th>
+                                    <td mat-cell *matCellDef="let element" class="txt-left"> {{element.name}}
+                                    </td>
+                                </ng-container>
+        
+                                <!-- <ng-container matColumnDef="descripcion">
+                                    <th mat-header-cell *matHeaderCellDef class="txt-left">
+                                        <strong>Descripcion</strong>
+                                    </th>
+                                    <td mat-cell *matCellDef="let element" class="txt-left"> {{element.description}}
+                                    </td>
+                                </ng-container> -->
+        
+                                <ng-container matColumnDef="fecha_guardado">
+                                    <th mat-header-cell *matHeaderCellDef class="enc-tabla"> <strong>Fecha </strong> </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.created_at | date:"yyyy-MM-dd"}}
+                                    </td>
+                                </ng-container>
+        
+                                <!-- <ng-container matColumnDef="imagen">
+                                    <th mat-header-cell *matHeaderCellDef class="enc-tabla"> <strong>Documento</strong>
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+        
+                                        <img download [src]="element.type == 1 ? element.url : 'assets/img/logo-pdf.png'"
+                                            alt="Documento" style="width: 50px;" class=" selectable"> </td>
+                                </ng-container> -->
+
+                                <ng-container matColumnDef="acciones">
+                                    <th mat-header-cell *matHeaderCellDef class="enc-tabla"> <strong>Acciones</strong>
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <a target="_blank" href="{{element.url}}" target="_blank" download>
+
+                                            <mat-icon svgIcon="file_download"></mat-icon>
+
+
+                                        </a>
+                                        <!-- <button (click)="openMultimediaModal(element)" mat-button class="color-azul-brand">
+                                                        <mat-icon [icIcon]="eye"></mat-icon>
+                                                        </button> -->
+                                        <!-- <button (click)="openMultimediaModal(element)" mat-button class="color-azul-brand">
+                                            Agregar descripcion
+                                        </button> -->
+                                        <button mat-icon-button class="color-azul-brand text-red-200" aria-label=""
+                                            (click)="deleteMultimedia(element)">
+                                            <mat-icon >delete</mat-icon>
+                                        </button>
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumnsDocuments2"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumnsDocuments2;"></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+         
+    </form>
+   
+ </div>

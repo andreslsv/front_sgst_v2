@@ -1,0 +1,566 @@
+<div class="flex-auto h-full  dark:bg-transparent">
+   <div
+       class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+       <div class="flex-1 min-w-0">
+           <!-- Breadcrumbs -->
+           <div class="flex flex-wrap items-center font-medium">
+               <div>
+                   <a class="whitespace-nowrap text-primary-500">Inicio</a>
+               </div>
+           </div>
+           <!-- Title -->
+           <div class="mt-2">
+               <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                   Independiente - {{currentRecord?.primer_nombre}}
+               </h2>
+           </div>
+       </div>
+       <!-- Actions -->
+       <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+           <a mat-flat-button href="https://material.angular.io/components/categories" target="_blank" rel="noreferrer"
+               [color]="'primary'">
+               <mat-icon class="icon-size-5 mr-2" class="icon-size-5 mr-2" [svgIcon]="'heroicons_solid:external-link'">
+               </mat-icon>
+               Pre-Afiliar
+           </a>
+       </div>
+       <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+           <a mat-flat-button href="https://material.angular.io/components/categories" target="_blank" rel="noreferrer"
+               [color]="'primary'">
+               <!-- <mat-icon class="icon-size-5 mr-2" class="icon-size-5 mr-2" [svgIcon]="'heroicons_solid:external-link'"></mat-icon> -->
+               Activa
+           </a>
+       </div>
+
+   </div>
+  
+   <div class=" bg-card shadow rounded-2xl m-10">   
+      <section class="cont-pages">
+        <mat-horizontal-stepper [linear]="isLinear" #stepper>  
+          <mat-step [stepControl]="firstFormGroup">
+            <ng-template matStepLabel>Datos básicos</ng-template>
+            <div fxLayoutAlign="space-between" >
+              <div  class="cont-subtitulo-3">
+                <!-- <h3 class="display-1 font-medium ">DATOS PERSONALES</h3> -->
+              </div>
+              <!-- <button color="primary" class=" border-button" *ngIf="user()==1"
+                (click)="openAsignarUsuarioModalComponent(currentRecord)" mat-flat-button type=" button">
+                <mat-icon >key</mat-icon>
+                Crear Usuario
+              </button> -->
+            </div>
+            <form [formGroup]="step_1">
+              <div class="cont-a">
+                      <div class="cont-a-1">
+                         <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                            <mat-label>nombres</mat-label>
+                            <input matInput type="text" placeholder="..." formControlName="primer_nombre" />
+                        </mat-form-field>
+    
+                         <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                          <mat-label>apellidos</mat-label>
+                          <input matInput type="text" placeholder="..." formControlName="primer_apellido" />
+                        </mat-form-field>
+                      </div>
+                      <div class="cont-a-2">
+                         <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                          <mat-label>Tipo de documento</mat-label>
+                          <mat-select formControlName="tipoDocumento" placeholder="..." #singleSelect>
+                            <mat-option value="CC">CC</mat-option>
+                            <mat-option value="Pasaporte">Pasaporte</mat-option>
+                            <mat-option value="DNI">DNI</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+    
+                         <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                          <mat-label>Número documento</mat-label>
+                          <input matInput type="number" placeholder="..." formControlName="numDocumento" />
+                        </mat-form-field>
+  <!-- 
+                         <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                          <mat-label>Departamento</mat-label>
+                         <mat-select formControlName="departamento" placeholder="..." #singleSelect>
+                           <mat-option value="Amazonas">Amazonas</mat-option>
+                           <mat-option value="Antioquia">Antioquia</mat-option>
+                           <mat-option value="Arauca">Arauca</mat-option>
+                           <mat-option value="Atlántico">Atlántico</mat-option>
+                           <mat-option value="Bolívar">Bolívar</mat-option>
+                           <mat-option value="Boyacá">Boyacá</mat-option>
+                           <mat-option value="Caldas">Caldas</mat-option>
+                           <mat-option value="Caquetá">Caquetá</mat-option>
+                           <mat-option value="Casanare">Casanare</mat-option>
+                           <mat-option value="Cauca">Cauca</mat-option>
+                           <mat-option value="Cesar">Cesar</mat-option>
+                           <mat-option value="Chocó">Chocó</mat-option>
+                           <mat-option value="Córdoba">Córdoba</mat-option>
+                           <mat-option value="Cundinamarca">Cundinamarca</mat-option>
+                           <mat-option value="Guainía">Guainía</mat-option>
+                           <mat-option value="Guaviare">Guaviare</mat-option>
+                           <mat-option value="Huila">Huila</mat-option>
+                           <mat-option value="La Guajira">La Guajira</mat-option>
+                           <mat-option value="Magdalena">Magdalena</mat-option>
+                           <mat-option value="Meta">Meta</mat-option>
+                           <mat-option value="Nariño">Nariño</mat-option>
+                           <mat-option value="Norte de Santander">Norte de Santander</mat-option>
+                           <mat-option value="Putumayo">Putumayo</mat-option>
+                           <mat-option value="Quindío">Quindío</mat-option>
+                           <mat-option value="Risaralda">Risaralda</mat-option>
+                           <mat-option value="San Andrés y Providencia">San Andrés y Providencia</mat-option>
+                           <mat-option value="Santander">Santander</mat-option>
+                           <mat-option value="Sucre">Sucre</mat-option>
+                           <mat-option value="Tolima">Tolima</mat-option>
+                           <mat-option value="Valle del Cauca">Valle del Cauca</mat-option>
+                           <mat-option value="Vaupés">Vaupés</mat-option>
+                           <mat-option value="Vichada">Vichada</mat-option>
+                         </mat-select>
+                         </mat-form-field>
+   -->
+  
+                          <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                            <mat-label>Departamento</mat-label>
+                            <mat-select placeholder="..." formControlName="departamento" #singleSelect
+                              [(ngModel)]="tipoDepartamentoSeleccionado">
+                              <mat-option *ngFor="let data of dataDepartamento;" [value]="data.nombre"
+                                (click)="setDepartamentoSeleccionado(data.id)">{{data.nombre}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+  
+                          <!-- <mat-form-field appearance="outline" class="mb-4 bold-form items-form" floatLabel="always"
+                            style="flex-grow: 1">
+                            <mat-label>Ciudad</mat-label>
+                            <mat-select placeholder="..." formControlName="ciudad" #singleSelect>
+                              <ng-container matColumnDef="item" *ngFor="let data of dataCiudad;">
+                                <mat-option *ngIf="data.id_departamento==departamento_seleccionado" [value]="data.nombre">
+                                  {{data.nombre}}</mat-option>
+                              </ng-container>
+                            </mat-select>
+                          </mat-form-field> -->
+                          <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                           <mat-label>Ciudad</mat-label>
+                           <input matInput type="text" placeholder="..." formControlName="ciudad" />
+                         </mat-form-field>
+                         
+                      </div>
+  
+                      <div class="cont-a-3">
+                         <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                          <mat-label>Dirección</mat-label>
+                          <input matInput type="text" placeholder="..." formControlName="direccion" />
+                        </mat-form-field>
+    
+                         <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                          <mat-label>Teléfono móvil</mat-label>
+                          <input matInput type="number" placeholder="..." formControlName="telefono" />
+                        </mat-form-field>
+  
+                         <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                          <mat-label>Correo Electronico</mat-label>
+                          <input matInput type="text" placeholder="..." formControlName="email" />
+                        </mat-form-field>
+                      </div>
+                  </div>
+            </form>
+            <div fxLayout="row" fxLayoutAlign="space-between" class="cont-btn-navegacion">
+             <div fxLayout="row">
+                
+                 <button (click)="openDocumentosModalIcon()" style="height: 50px;" mat-flat-button
+                     class="border-button" color="primary">
+                     <mat-icon class="icon-size-5 mr-2">
+                         add_a_photo
+                     </mat-icon>
+                      Subir Foto
+                 </button>
+                  <div *ngFor="let item of dataPersona">
+                      <mat-icon *ngIf="item.imagen != null" class="icon-size-5 mr-2" height="30"
+                          style="color: green;margin: 10px;" svgIcon="check_circle_outline"></mat-icon>
+                      <mat-icon *ngIf="item.imagen == null" class="icon-size-5 mr-2" height="30"
+                          style="color: red;margin: 10px;" svgIcon="mat_outline:remove_circle"></mat-icon>
+                  </div>
+             </div>
+              <button (click)="save()" (click)="saveStatus1()" class="border-button" mat-flat-button color="primary"
+                matStepperNext>
+                <mat-icon>save</mat-icon>
+                Guardar
+              </button>
+            </div>
+          </mat-step>
+              
+          <mat-step [stepControl]="secondFormGroup">
+            <ng-template matStepLabel>Seguridad Social</ng-template>
+                <div class="cont-subtitulo-3">
+                  <h3 class="display-1 font-medium ">INFORMACIÓN DE LA AFILIACIÓN</h3>
+                </div>
+                  <div class="cont-c">
+                      <form [formGroup]="step_1">
+                          <div class="cont-c-a">
+                           
+                                  <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                      <mat-label>F de pensiones</mat-label>
+                                      <mat-select formControlName="pensiones" placeholder="..." #singleSelect>
+                                        <mat-option *ngFor="let data of dataPension" [value]="data.nombre">
+                                          {{data.nombre}}
+                                        </mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                 <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                 <mat-label>EPS</mat-label>
+                                 <mat-select placeholder="Selecciona" formControlName="eps">
+                                   <mat-option value="{{eps.nombre}}" *ngFor="let eps of dataEps">{{eps.nombre}} |
+                                     {{eps.codigo}}</mat-option>
+                                 </mat-select>
+                               </mat-form-field>
+          
+                                <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                  <mat-label>ARL</mat-label>
+                                  <mat-select formControlName="arl" placeholder="..." #singleSelect>
+                                    <mat-option value="Alfa S.A.">Alfa S.A.</mat-option>
+                                    <mat-option value="Aurora S.A">Aurora S.A</mat-option>
+                                    <mat-option value="Axa Colpatria.">Axa Colpatria.</mat-option>
+                                    <mat-option value="Bolívar">Bolívar</mat-option>
+                                    <mat-option value="Colmena.">Colmena.</mat-option>
+                                    <mat-option value="La Equidad">La Equidad</mat-option>
+                                    <mat-option value="Liberty.">Liberty.</mat-option>
+                                    <mat-option value="Mapfre">Mapfre</mat-option>
+                                    <mat-option value="Positiva">Positiva</mat-option>
+                                 <mat-option value="Sura">Sura</mat-option>
+                                    <mat-option value="No tiene.">No tiene.</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+  
+                               <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                  <mat-label>Tipo de vinculación</mat-label>
+                                  <mat-select formControlName="tipoVinculacion" placeholder="..." #singleSelect>                          
+                                      <mat-option value="1">Afiliacion inicial</mat-option>
+                                      <mat-option value="2">Reingreso como idependiente</mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                          </div>
+  
+                          <div class="cont-c-b">
+                                <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                                 <mat-label>Tipo de afiliación</mat-label>
+                                 <mat-select formControlName="tipoAfiliacion" placeholder="..." #singleSelect>
+                                   <mat-option value="1">Solo Salud</mat-option>
+                                   <mat-option value="2">Salud y pension</mat-option>
+                                   <mat-option value="3">Salud y Riesgos</mat-option>
+                                   <mat-option value="4">Salud, Pension y ARL</mat-option>
+                                   <mat-option value="5">Salud, Pension ,ARL y Caja de compensasion</mat-option>
+                                 </mat-select>
+                               </mat-form-field>
+                           <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                              <mat-label>Cargo</mat-label>
+                              <input matInput type="text" placeholder="..." formControlName="cargo" />
+                           </mat-form-field>
+  
+                  <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                            <mat-label>RIESGO</mat-label>
+                            <mat-select formControlName="riesgo" placeholder="..." #singleSelect>
+                              <mat-option value="1">1</mat-option>
+                              <mat-option value="2">2</mat-option>
+                              <mat-option value="3">3</mat-option>
+                              <mat-option value="4">4</mat-option>
+                              <mat-option value="5">5</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+  
+                        
+                          <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                            <mat-label>Salario base</mat-label>
+                            <input min="1000000" matInput type="number" placeholder="..." formControlName="salario_base" />
+                            <mat-error *ngIf="step_1.get('salario_base').invalid">El salario base es obligatorio
+                            </mat-error>
+                          </mat-form-field>
+                       </div>
+                    </form>
+                  </div>
+                  <div class="cont-agregar-sucursal">
+                    <button (click)="openagregarSucursalModal(id)" class="btn-basic"><span>Agregar Sucursal</span>
+                      <mat-icon ></mat-icon>
+                    </button>
+                           <ul *ngFor="let item of dataSucursal">
+                             <li> {{ item?.nombre}} | {{ item?.caja_cf }}</li>
+  
+                             <li>
+                               <span>
+                                 <ic-icon (click)="openagregarSucursalModal(item)" [icon]="eye" inline="true" size="24px"
+                                   class="color-azul-brand"></ic-icon>
+                                 <ic-icon *ngIf="eliminar()== 1" (click)="deleteSucursal(item)"
+                                   [icon]="baselineDeleteForever" inline="true"
+                                   size="24px" class="icon-rojo"></ic-icon>
+                               </span>
+                             </li>
+                           </ul>
+                  </div>
+                  <div class="cont-btn-navegacion">
+                   
+                    <button (click)="save()" class="border-button" mat-flat-button color="primary" style="margin-left: 5px;" matStepperNext>
+                     <mat-icon>save</mat-icon>
+                      Guardar 
+                    </button>
+                  </div>
+          </mat-step>
+  
+  
+          <mat-step>
+            <ng-template matStepLabel>Inf. Beneficiario</ng-template>
+  
+            <div class="cont-tit-ibeneficiario">
+              <div class="cont-subtitulo-3">
+                <!-- <h3 class="display-1 font-medium ">Informacion De Beneficiariós</h3>
+                <br> -->
+                 <button (click)="openBeneficiario(id)" class="border-button" mat-flat-button color="primary"><span
+                         style="color:white">Agregar</span>
+                  <mat-icon >add</mat-icon>
+                </button>
+              </div>
+            </div>
+  
+            <div class="cont-e">
+              <div class="cont-e-a">
+                <!-- <form [formGroup]="step_4">
+                  <div class="cont-e-a-a">
+                     <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                      <mat-label>Nombre Beneficiaro</mat-label>
+                          <input matInput type="text" placeholder="..." formControlName="nombre_beneficiario" />
+                      </mat-form-field>
+    
+                       <mat-form-field class="flex-auto" style="flex-grow: 1; width:100%">
+                          <mat-label>Tipo</mat-label>
+                      <mat-select formControlName="tipo" placeholder="..." #singleSelect>
+                        <mat-option>
+                          Cúcuta
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </form> -->
+  
+                <!-- <div class="cont-e-a-b">
+  
+  
+                  <div style="flex-grow: 1;">
+                    <button class="border-button" mat-flat-button color="primary">CÉDULA</button>
+                  </div>
+                  <div style="flex-grow: 1;">
+                    <button class="border-button" mat-flat-button color="primary">REGISTRO CIVIL</button>
+                  </div>
+                  <div style="flex-grow: 1;">
+                    <button class="border-button" mat-flat-button color="primary">TARJETA DE IDENTIDAD</button>
+                  </div>
+                  <div style="flex-grow: 1;">
+                    <button class="border-button" mat-flat-button color="primary">CERTIFICADO ESTUD.</button>
+                  </div>
+                </div> -->
+  
+                <div class="cont-table">
+                  <table mat-table [dataSource]="beneficiado" class="table-100">
+  
+                    <ng-container matColumnDef="nombre_beneficiario">
+                      <th mat-header-cell *matHeaderCellDef class="txt-left"> Nombre beneficiario </th>
+                      <td mat-cell *matCellDef="let element" class="txt-left"> {{element.nombre}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="tipo">
+                      <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                      <td mat-cell *matCellDef="let element"> {{element.tipo == 1 ? 'Conyugue' : element.tipo == 2 ? 'Hijo' : element.tipo == 3? 'Padres' : null}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="acciones">
+                      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                      <td mat-cell *matCellDef="let element"> 
+                        <button class="color-azul"
+                          style="padding: 10px 10px; margin-left: 15px;">
+                          <mat-icon  (click)="openBeneficiario(element)" svgIcon="edit"></mat-icon>
+      
+                        </button>
+                         <button class="color-azul">
+                           <mat-icon (click)="openBeneficiario2(element)">upload_file</mat-icon>
+                         </button>
+                        <button class="icon-rojo" style="padding: 10px 10px;">
+                          <mat-icon *ngIf="eliminar()== 1" (click)="delete(element)" >
+                          delete
+                          </mat-icon>
+                        </button>
+                       </td>
+                    </ng-container>
+  
+                    <tr mat-header-row *matHeaderRowDef="beneficiarios_displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: beneficiarios_displayedColumns;"></tr>
+                  </table>
+                </div>
+  
+              </div>
+              <div class="cont-e-b">
+                <div class="cont-alerta">
+                  <h3>Documentos Solicitados</h3>
+                  <p>
+                    Conyugue o compañero(a) permanente: Copia de la cédula.
+  
+                    Hijos: copia del registro civil , si es mayor de 7 años también deberá adjuntar copia de la tarjeta de identidad, si es mayor a 12 años certificado de estudios, copia de la tarjeta de identidad y copia del registro civil.
+  
+                    Hijos mayores de 18 años: Copia de la cédula de ciudadanía, Copia del registro civil de nacimiento (Solo tiene derecho a salud hasta los 25 años) .
+  
+                    Padres: Copia de la cédula de ciudadanía y Copia del registro civil de nacimiento del cotizante. 
+  
+                  </p>
+  
+                </div>
+              </div>
+            </div>
+  
+        
+          </mat-step>
+                <mat-step>
+                  <ng-template matStepLabel>Resumen</ng-template>
+                  <br>
+  
+                  <div style="background: rgb(244 244 244); border-radius: 10px;padding: 20px;" class="cont-emp-top">
+                    <div class="cont-subtitulo-3" style="margin-top:20px">
+                      <h1 style="color: rgb(0, 18, 68);" class="display-1 font-medium ">Resumen de Servicios a contratar</h1>
+                      <h3 class="display-1 font-medium ">La tarifa estan establecidas segun el servicio seleccionado</h3>
+                    </div>
+                      <!-- <button (click)="deleteServicios()">
+                        <mat-icon style="font-size: xxx-large; margin: 20px; color: #001a77;" aria-hidden="false">
+                          restart_alt
+                        </mat-icon>
+                      </button> -->
+                      <button (click)="openPresupuesto()">
+                        <mat-icon style="font-size: xxx-large; margin: 20px; color: #001a77;" aria-hidden="false" aria-label="Example home icon">local_printshop</mat-icon>
+                      </button>
+                  </div>
+                  <!-- <table class="table table-striped" style="width: 100%;" *ngFor="let item of datos">
+            <thead>
+              <tr style="font-size: x-large;">
+                <th scope="col">{{item.primer_nombre}}</th>
+                <th scope="col">{{item.numDocumento}}</th>
+                <th scope="col">{{item.direccion}}</th>
+  
+              </tr>
+            </thead>
+          </table> -->
+  
+                  <div class="cont-table" style="margin-bottom:50px; margin-top: 50px;">
+                    <table mat-table [dataSource]="detalleServicio" class="table-100">
+                      <ng-container matColumnDef="nombre_empleado">
+                        <th mat-header-cell *matHeaderCellDef class="txt-left"> Servicio </th>
+                        <td mat-cell *matCellDef="let element" class="txt-left">
+                          {{ element.nombre}}
+                        </td>
+  
+                      </ng-container>
+  
+                      <ng-container matColumnDef="documento_empleado">
+                        <th mat-header-cell *matHeaderCellDef class="enc-tabla"> Unidad </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.valor == 1 ? ' No aplica' : element.unidad == 2 ? ' Servicio' : element.unidad == 1 ? ' Persona' : ''}}
+                        </td>>
+                      </ng-container>
+  
+                      <ng-container matColumnDef="afiliacion">
+                        <th mat-header-cell *matHeaderCellDef class="enc-tabla"> Precio Unitario </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{element.valor == 1 ? ' No aplica' : element.valor | currency}}
+                        </td>
+                      </ng-container>
+  
+                      <ng-container matColumnDef="contrato">
+                        <th mat-header-cell *matHeaderCellDef class="enc-tabla"> Cantidad </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{element.valor == 1 ? ' No aplica' : element.cantidad}}
+                        </td>
+  
+                      </ng-container>
+                      <!-- 
+              <ng-container matColumnDef="nomina">
+                <th mat-header-cell *matHeaderCellDef class="enc-tabla"> Nomina </th>
+                <td mat-cell *matCellDef="let element">
+                  <p *ngFor="let item of data">
+                    ${{total<= 4 ? element.detalleServicio4?.valor : total< 10 ? element.detalleServicio4?.valor2 : total>= 10 ? element.detalleServicio4?.valor3 : 'No solicitado'}}
+                  </p>
+                </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="ss">
+                <th mat-header-cell *matHeaderCellDef class="enc-tabla"> SS </th>
+                <td mat-cell *matCellDef="let element">
+                  <p *ngFor="let item of data">
+                    ${{total<= 4 ? element.detalleServicio3?.valor : total< 10 ? element.detalleServicio3?.valor2 : total>= 10 ? element.detalleServicio3?.valor3 : 'No solicitado'}}
+                  </p>
+                </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="prestaciones">
+                <th mat-header-cell *matHeaderCellDef class="enc-tabla">Prestaciones Sociales</th>
+                <td mat-cell *matCellDef="let element">
+                  <p *ngFor="let item of data">
+                    ${{total<= 4 ? element.detalleServicio5?.valor : total< 10 ? element.detalleServicio5?.valor2 : total>= 10 ? element.detalleServicio5?.valor3 : 'No solicitado'}}
+                  </p>
+                </td>
+              </ng-container> -->
+  
+                      <ng-container matColumnDef="total">
+                        <th mat-header-cell *matHeaderCellDef>Total </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{element.valor == 1 ? 0 : element.valor  * element.cantidad | currency}}
+                        </td>
+                      </ng-container>
+  
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                  </div>
+                   <table fxLayoutAlign="end " class="table table-sm">
+                     <tbody>
+                       <tr>
+                         <th scope="row">
+                           <h1 style="font-weight: bold;"><span style="color:rgb(0, 18, 68);">SubTotal:</span></h1>
+                         </th>
+                         <td>
+                           <h1> {{totalServicio | currency}}</h1>
+                         </td>
+  
+                       </tr>
+                       <tr>
+                         <th scope="row">
+                           <h1 style="font-weight: bold;"><span style="color:rgb(0, 18, 68);">Iva:</span></h1>
+                         </th>
+                         <td>
+                           <h1>{{totalServicio * currentRecord?.iva /100 | currency}}</h1>
+                         </td>
+  
+                       </tr>
+                       <tr>
+                         <th scope="row">
+                           <h1 style="font-weight: bold;"><span style="color:rgb(0, 18, 68);">Total:</span></h1>
+                         </th>
+                         <td colspan="2">
+                           <h1>{{totalServicio * currentRecord?.iva /100 + totalServicio | currency}}</h1>
+                         </td>
+  
+                       </tr>
+                     </tbody>
+                   </table>
+                  <br>
+                  <!-- <div style="margin-bottom:50px" fxLayoutAlign="end" class="cont-btn-navegacion">
+                    <h2 style="font-weight: bold;">TOTAL DE SERVICIOS : {{totalServicio | currency}}</h2>
+                  </div> -->
+                  <div fxLayout="column" fxFlex fxLayoutAlign="center stretch" fxLayoutGap="8px"
+                    [ngClass]="{'hidden': !alertIsVisible}" class="p-6 mt-6"
+                    style="background-color: rgb(244, 244, 244);border-radius: 4px;position:relative;">
+                    <h4 class="font-bold text-black">¡Notificación!</h4>
+                    <p class="text-black">Este valor corresponde al pago de los servicios prestados no incluye pagos a
+                      fondos de pensiones ni aportes PILA.<br>
+                      Al dar click en finalizar el proceso de afiliacion esta aceptando los terminos y las condiciones.
+                    </p>
+                    <a (click)="alertIsVisible = !alertIsVisible"
+                      style="position: absolute;top: 10px;right: 12px;padding: 2px;">
+                      <ic-icon  style="color:black;"></ic-icon>
+                    </a>
+                  </div>
+                  <br>
+            
+                </mat-step>
+        </mat-horizontal-stepper>     
+    </section>
+    </div>
+</div>

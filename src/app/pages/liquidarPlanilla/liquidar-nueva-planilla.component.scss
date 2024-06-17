@@ -1,0 +1,50 @@
+.btn-verde{
+    padding: 10px 15px;
+}
+
+// .btn-linea-verde{
+//     background-color: transparent;
+//     color: #54b34b;
+//     padding: 10px 15px;
+//     margin: 5px 0px;
+// }
+.btn-linea-azul {
+    background-color: transparent;
+    color: #08023f;
+    padding: 10px 15px;
+    margin: 5px 0px;
+    border-color: #08023f;
+    border: solid;
+    border-width: 1px;
+    border-radius: 10px;
+}
+.cont-btns-title{
+    display: flex;
+    flex-direction: column;
+}
+
+.cont-botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 30px 10px;
+}
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+
+        color: #078d17;
+        border-bottom: solid;
+        border-right: 0px;
+    // background-color: green;
+}
+::ng-deep .mat-tab-label {
+    font-size: larger;
+    color:grey;
+    // border-bottom: solid;
+    border-right: 0px;
+    // background-color: green;
+}
+::ng-deep .mat-tab-list .mat-tab-labels {
+    color: blue;
+    border-right: 0px;
+    // background-color: yellow;
+}
